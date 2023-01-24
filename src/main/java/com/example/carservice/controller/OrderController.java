@@ -4,19 +4,18 @@ import com.example.carservice.dto.mapper.RequestDtoMapper;
 import com.example.carservice.dto.mapper.ResponseDtoMapper;
 import com.example.carservice.dto.request.GoodsRequestDto;
 import com.example.carservice.dto.request.OrderRequestDto;
+import com.example.carservice.dto.request.StatusRequestDto;
 import com.example.carservice.dto.response.OrderResponseDto;
 import com.example.carservice.model.Goods;
 import com.example.carservice.model.Order;
 import com.example.carservice.service.OrderService;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import java.math.BigDecimal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,15 +25,18 @@ public class OrderController {
     private final RequestDtoMapper<OrderRequestDto, Order> requestDtoMapper;
     private final ResponseDtoMapper<OrderResponseDto, Order> responseDtoMapper;
     private final RequestDtoMapper<GoodsRequestDto, Goods> goodsRequestDtoMapper;
+    private final RequestDtoMapper<StatusRequestDto, Order.OrderStatus> statusRequestDtoMapper;
 
     public OrderController(OrderService orderService,
-                           RequestDtoMapper<OrderRequestDto, Order> requestDtoMapper,
-                           ResponseDtoMapper<OrderResponseDto, Order> responseDtoMapper,
-                           RequestDtoMapper<GoodsRequestDto, Goods> goodsRequestDtoMapper) {
+            RequestDtoMapper<OrderRequestDto, Order> requestDtoMapper,
+            ResponseDtoMapper<OrderResponseDto, Order> responseDtoMapper,
+            RequestDtoMapper<GoodsRequestDto, Goods> goodsRequestDtoMapper,
+            RequestDtoMapper<StatusRequestDto, Order.OrderStatus> statusRequestDtoMapper) {
         this.orderService = orderService;
         this.requestDtoMapper = requestDtoMapper;
         this.responseDtoMapper = responseDtoMapper;
         this.goodsRequestDtoMapper = goodsRequestDtoMapper;
+        this.statusRequestDtoMapper = statusRequestDtoMapper;
     }
 
     @PostMapping
@@ -64,8 +66,8 @@ public class OrderController {
     @GetMapping("/{id}/status")
     @ApiOperation("Update status by order id")
     public OrderResponseDto updateStatus(@PathVariable Long id,
-                                         @ApiParam("Status name") @RequestParam String name) {
-        Order.OrderStatus status = Order.OrderStatus.valueOf(name);
+                                         @RequestBody StatusRequestDto statusRequestDto) {
+        Order.OrderStatus status = statusRequestDtoMapper.mapToModel(statusRequestDto);
         return responseDtoMapper.mapToDto(orderService.updateStatus(id, status));
     }
 
