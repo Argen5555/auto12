@@ -41,7 +41,7 @@ In this program, you can store such data as information about drivers, their car
 ## 📎 How to start the program
 **To run an application via Docker, you must have the latest version of Docker installed on your local machine!**
 1. Clone the project from GitHub
-2. Open terminal in the project folder and run `mvn clean package` (you must also have Maven and JDK installed)
+2. Open terminal in the project folder and run `mvn clean package -DskipTests` (you must also have Maven installed)
 3. When the project was built successfully, run the following command: `docker-compose up`
 4. After a successful start, the program can be tested using the link `http://localhost:6868/swagger-ui.html`
 
