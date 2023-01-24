@@ -24,7 +24,6 @@ public class CarMapper implements RequestDtoMapper<CarRequestDto, Car>,
         car.setModel(dto.getModel());
         car.setYear(dto.getYear());
         car.setNumber(dto.getNumber());
-        car.setOwner(ownerRepository.getReferenceById(dto.getOwnerId()));
         return car;
     }
 
@@ -36,7 +35,6 @@ public class CarMapper implements RequestDtoMapper<CarRequestDto, Car>,
         dto.setModel(car.getModel());
         dto.setYear(car.getYear());
         dto.setNumber(car.getNumber());
-        dto.setOwnerId(car.getOwner().getId());
         return dto;
     }
 }

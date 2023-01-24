@@ -8,7 +8,6 @@ import lombok.Setter;
 public class CarRequestDto {
     private String brand;
     private String model;
-    private int year;
+    private Integer year;
     private String number;
-    private Long ownerId;
 }
