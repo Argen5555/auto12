@@ -21,3 +21,5 @@ databaseChangeLog:
       file: /db/changelog/changes/create-owners-cars-table.sql
   - include:
       file: /db/changelog/changes/create-owners-orders-table.sql
+  - include:
+      file: /db/changelog/changes/insert-diagnostic-into-services.sql
