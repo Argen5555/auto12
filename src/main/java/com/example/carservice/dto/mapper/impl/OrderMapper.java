@@ -41,7 +41,6 @@ public class OrderMapper implements RequestDtoMapper<OrderRequestDto, Order>,
                 .map(goodsRepository::getReferenceById)
                 .toList());
         order.setStatus(dto.getStatus());
-        order.setPrice(dto.getPrice());
         return order;
     }
 
