@@ -59,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
         return price;
     }
 
-    private BigDecimal calculateServicesPriceAfterDiscount(Order order) {
+    private BigDecimal calculateGoodsPriceAfterDiscount(Order order) {
         int ownerOrderSize = order.getCar().getOwner().getOrders().size();
         double discount = ownerOrderSize * GOODS_DISCOUNT_PERCENT;
         return order.getGoods()
@@ -69,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
                 .multiply(new BigDecimal(1.0 - discount));
     }
 
-    private BigDecimal calculateGoodsPriceAfterDiscount(Order order) {
+    private BigDecimal calculateServicesPriceAfterDiscount(Order order) {
         int ownerOrderSize = order.getCar().getOwner().getOrders().size();
         double discount = ownerOrderSize * SERVICE_DISCOUNT_PERCENT;
         if (order.getServices().stream().anyMatch(s -> s.getId().equals(DIAGNOSTIC_ID))) {
@@ -81,7 +81,8 @@ public class OrderServiceImpl implements OrderService {
                         .reduce(BigDecimal.ZERO, BigDecimal::add)
                         .multiply(new BigDecimal(1.0 - discount));
             } else {
-                return order.getServices().get(0).getPrice();
+                return order.getServices().get(0).getPrice()
+                        .multiply(new BigDecimal(1.0 - discount));
             }
         }
         return new BigDecimal(0);
