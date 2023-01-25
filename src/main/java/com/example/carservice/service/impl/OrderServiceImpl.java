@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl implements OrderService {
     private static final double GOODS_DISCOUNT_PERCENT = 0.01;
     private static final double SERVICE_DISCOUNT_PERCENT = 0.02;
-    private static final BigDecimal DIAGNOSTIC_PRICE = new BigDecimal(500);
+    private static final Long DIAGNOSTIC_ID = 1L;
     private final OrderRepository orderRepository;
 
     public OrderServiceImpl(OrderRepository orderRepository) {
@@ -52,27 +52,38 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public BigDecimal calculatePrice(Long id) {
         Order order = orderRepository.getReferenceById(id);
-        int ownerOrderSize = order.getCar().getOwner().getOrders().size();
-        double goodsDiscount = ownerOrderSize * GOODS_DISCOUNT_PERCENT;
-        double serviceDiscount = ownerOrderSize * SERVICE_DISCOUNT_PERCENT;
-        BigDecimal goodsPriceAfterDiscount = order.getGoods()
-                .stream()
-                .map(Goods::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add)
-                .multiply(new BigDecimal(1.0 - goodsDiscount));
-        BigDecimal price;
-        if (order.getServices().size() > 0) {
-            BigDecimal servicesPriceAfterDiscount = order.getServices()
-                    .stream()
-                    .map(ServiceModel::getPrice)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add)
-                    .multiply(new BigDecimal(1.0 - serviceDiscount));
-            price = goodsPriceAfterDiscount.add(servicesPriceAfterDiscount);
-        } else {
-            price = goodsPriceAfterDiscount.add(DIAGNOSTIC_PRICE);
-        }
+        BigDecimal price = calculateGoodsPriceAfterDiscount(order)
+                .add(calculateServicesPriceAfterDiscount(order));
         order.setPrice(price);
         update(order);
         return price;
+    }
+
+    private BigDecimal calculateServicesPriceAfterDiscount(Order order) {
+        int ownerOrderSize = order.getCar().getOwner().getOrders().size();
+        double discount = ownerOrderSize * GOODS_DISCOUNT_PERCENT;
+        return order.getGoods()
+                .stream()
+                .map(Goods::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .multiply(new BigDecimal(1.0 - discount));
+    }
+
+    private BigDecimal calculateGoodsPriceAfterDiscount(Order order) {
+        int ownerOrderSize = order.getCar().getOwner().getOrders().size();
+        double discount = ownerOrderSize * SERVICE_DISCOUNT_PERCENT;
+        if (order.getServices().stream().anyMatch(s -> s.getId().equals(DIAGNOSTIC_ID))) {
+            if (order.getServices().size() > 1) {
+                return order.getServices()
+                        .stream()
+                        .filter(s -> !s.getId().equals(DIAGNOSTIC_ID))
+                        .map(ServiceModel::getPrice)
+                        .reduce(BigDecimal.ZERO, BigDecimal::add)
+                        .multiply(new BigDecimal(1.0 - discount));
+            } else {
+                return order.getServices().get(0).getPrice();
+            }
+        }
+        return new BigDecimal(0);
     }
 }
