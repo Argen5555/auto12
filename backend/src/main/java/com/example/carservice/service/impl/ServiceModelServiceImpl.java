@@ -15,6 +15,16 @@ public class ServiceModelServiceImpl implements ServiceModelService {
     }
 
     @Override
+    public List<ServiceModel> getAll() {
+        return serviceRepository.findAll();
+    }
+
+    @Override
+    public ServiceModel get(Long id) {
+        return serviceRepository.getReferenceById(id);
+    }
+
+    @Override
     public ServiceModel add(ServiceModel service) {
         return serviceRepository.save(service);
     }

@@ -36,6 +36,22 @@ public class MasterController {
         this.orderResponseDtoMapper = orderResponseDtoMapper;
     }
 
+    @GetMapping
+    @ApiOperation("Get all masters")
+    public List<MasterResponseDto> getAll() {
+        return masterService.getAll()
+                .stream()
+                .map(responseDtoMapper::mapToDto)
+                .toList();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("Get master by id")
+    public MasterResponseDto get(@PathVariable Long id) {
+        Master master = masterService.get(id);
+        return responseDtoMapper.mapToDto(master);
+    }
+
     @PostMapping
     @ApiOperation("Add a new master")
     public MasterResponseDto create(@RequestBody MasterRequestDto requestDto) {

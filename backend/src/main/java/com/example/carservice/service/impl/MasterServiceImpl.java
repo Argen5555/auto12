@@ -23,6 +23,16 @@ public class MasterServiceImpl implements MasterService {
     }
 
     @Override
+    public List<Master> getAll() {
+        return masterRepository.findAll();
+    }
+
+    @Override
+    public Master get(Long id) {
+        return masterRepository.getReferenceById(id);
+    }
+
+    @Override
     public Master add(Master master) {
         return masterRepository.save(master);
     }

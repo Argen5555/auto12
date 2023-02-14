@@ -6,6 +6,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface MasterService {
+    List<Master> getAll();
+
+    Master get(Long id);
+
     Master add(Master master);
 
     Master update(Master master);

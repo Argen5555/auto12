@@ -7,6 +7,8 @@ import com.example.carservice.dto.response.GoodsResponseDto;
 import com.example.carservice.model.Goods;
 import com.example.carservice.service.GoodsService;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +28,22 @@ public class GoodsController {
         this.goodsService = goodsService;
         this.requestDtoMapper = requestDtoMapper;
         this.responseDtoMapper = responseDtoMapper;
+    }
+
+    @GetMapping
+    @ApiOperation("Get all goods")
+    public List<GoodsResponseDto> getAll() {
+        return goodsService.getAll()
+                .stream()
+                .map(responseDtoMapper::mapToDto)
+                .toList();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("Get goods by id")
+    public GoodsResponseDto get(@PathVariable Long id) {
+        Goods goods = goodsService.get(id);
+        return responseDtoMapper.mapToDto(goods);
     }
 
     @PostMapping
