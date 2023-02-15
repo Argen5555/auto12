@@ -40,10 +40,4 @@ public class ServiceModelServiceImpl implements ServiceModelService {
         service.setStatus(status);
         return update(service);
     }
-
-    @Override
-    public List<ServiceModel> getAllByMasterIdAndStatus(Long masterId,
-                                                        ServiceModel.ServiceStatus status) {
-        return serviceRepository.getAllByMasterIdAndStatus(masterId, status);
-    }
 }

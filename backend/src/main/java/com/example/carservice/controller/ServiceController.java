@@ -67,7 +67,7 @@ public class ServiceController {
         return responseDtoMapper.mapToDto(serviceModelService.update(service));
     }
 
-    @GetMapping("/{id}/status")
+    @PostMapping("/{id}/status")
     @ApiOperation("Update status by service id")
     public ServiceResponseDto updateStatus(@PathVariable Long id,
                                            @RequestBody StatusRequestDto statusRequestDto) {

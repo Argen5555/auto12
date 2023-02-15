@@ -43,21 +43,25 @@ public class MasterServiceImpl implements MasterService {
     }
 
     @Override
+    public List<Master> update(Iterable<Master> masters) {
+        return masterRepository.saveAll(masters);
+    }
+
+    @Override
     public List<Order> getOrders(Long id) {
         return masterRepository.getReferenceById(id).getCompletedOrders();
     }
 
     @Override
     public BigDecimal calculateSalary(Long id) {
-        List<ServiceModel> services = serviceModelService
-                .getAllByMasterIdAndStatus(id, ServiceModel.ServiceStatus.UNPAID);
-        BigDecimal salary = services
+        return get(id).getCompletedOrders()
                 .stream()
+                .flatMap(order -> order.getServices().stream())
+                .filter(service -> service.getStatus().equals(ServiceModel.ServiceStatus.UNPAID))
+                .peek(service -> serviceModelService.updateStatus(
+                        service.getId(), ServiceModel.ServiceStatus.PAID))
                 .map(ServiceModel::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .multiply(new BigDecimal(SALARY_PERCENT));
-        services.forEach(service ->
-                serviceModelService.updateStatus(service.getId(), ServiceModel.ServiceStatus.PAID));
-        return salary;
     }
 }

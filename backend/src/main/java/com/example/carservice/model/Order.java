@@ -32,10 +32,7 @@ public class Order {
     private String description;
     @Column(name = "order_time")
     private LocalDateTime orderTime;
-    @OneToMany
-    @JoinTable(name = "orders_services",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id"))
+    @OneToMany(mappedBy = "order")
     private List<ServiceModel> services;
     @OneToMany
     @JoinTable(name = "orders_goods",

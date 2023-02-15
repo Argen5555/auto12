@@ -80,7 +80,7 @@ public class OrderController {
         return responseDtoMapper.mapToDto(orderService.addGoods(id, goods));
     }
 
-    @GetMapping("/{id}/status")
+    @PostMapping("/{id}/status")
     @ApiOperation("Update status by order id")
     public OrderResponseDto updateStatus(@PathVariable Long id,
                                          @RequestBody StatusRequestDto statusRequestDto) {

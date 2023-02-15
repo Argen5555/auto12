@@ -14,6 +14,8 @@ public interface MasterService {
 
     Master update(Master master);
 
+    List<Master> update(Iterable<Master> masters);
+
     List<Order> getOrders(Long id);
 
     BigDecimal calculateSalary(Long id);

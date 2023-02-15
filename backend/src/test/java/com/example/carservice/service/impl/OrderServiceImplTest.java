@@ -9,6 +9,8 @@ import com.example.carservice.repository.OrderRepository;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
+
+import com.example.carservice.service.MasterService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,6 +26,8 @@ class OrderServiceImplTest {
 
     @Mock
     private OrderRepository orderRepository;
+    @Mock
+    private MasterService masterService;
 
     @Test
     void updateStatusWithoutCompletionTime() {
@@ -58,7 +62,7 @@ class OrderServiceImplTest {
         order.setGoods(List.of(goods));
 
         ServiceModel diagnostic = new ServiceModel();
-        diagnostic.setId(1L);
+        diagnostic.setDiagnostic(true);
         diagnostic.setPrice(new BigDecimal(500));
         order.setServices(List.of(diagnostic));
         Mockito.when(orderRepository.getReferenceById(id)).thenReturn(order);
@@ -81,10 +85,10 @@ class OrderServiceImplTest {
         order.setGoods(List.of(goods));
 
         ServiceModel diagnostic = new ServiceModel();
-        diagnostic.setId(1L);
+        diagnostic.setDiagnostic(true);
         diagnostic.setPrice(new BigDecimal(500));
         ServiceModel service = new ServiceModel();
-        service.setId(2L);
+        service.setDiagnostic(false);
         service.setPrice(new BigDecimal(800));
         order.setServices(List.of(diagnostic, service));
         Mockito.when(orderRepository.getReferenceById(id)).thenReturn(order);
@@ -97,6 +101,7 @@ class OrderServiceImplTest {
     private void updateStatusTestInit(Long id, Order.OrderStatus status) {
         Order order = new Order();
         order.setStatus(status);
+        order.setServices(List.of());
         Mockito.when(orderRepository.getReferenceById(id)).thenReturn(order);
         Mockito.when(orderRepository.save(Mockito.any())).thenAnswer(i -> i.getArguments()[0]);
     }

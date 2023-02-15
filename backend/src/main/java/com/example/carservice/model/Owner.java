@@ -20,10 +20,7 @@ public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
-    @JoinTable(name = "owners_cars",
-            joinColumns = @JoinColumn(name = "owner_id"),
-            inverseJoinColumns = @JoinColumn(name = "car_id"))
+    @OneToMany(mappedBy = "owner")
     private List<Car> cars;
     @OneToMany
     @JoinTable(name = "owners_orders",

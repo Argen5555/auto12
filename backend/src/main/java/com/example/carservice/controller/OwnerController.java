@@ -53,8 +53,8 @@ public class OwnerController {
 
     @PostMapping
     @ApiOperation("Add a new owner")
-    public OwnerResponseDto create(@RequestBody OwnerRequestDto requestDto) {
-        Owner owner = requestDtoMapper.mapToModel(requestDto);
+    public OwnerResponseDto create() {
+        Owner owner = newOwner();
         return responseDtoMapper.mapToDto(ownerService.add(owner));
     }
 
@@ -74,5 +74,12 @@ public class OwnerController {
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();
+    }
+
+    private Owner newOwner() {
+        Owner owner = new Owner();
+        owner.setCars(List.of());
+        owner.setOrders(List.of());
+        return owner;
     }
 }

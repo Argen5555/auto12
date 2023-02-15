@@ -5,16 +5,16 @@ import com.example.carservice.dto.mapper.ResponseDtoMapper;
 import com.example.carservice.dto.request.CarRequestDto;
 import com.example.carservice.dto.response.CarResponseDto;
 import com.example.carservice.model.Car;
-import com.example.carservice.repository.OwnerRepository;
+import com.example.carservice.service.OwnerService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CarMapper implements RequestDtoMapper<CarRequestDto, Car>,
         ResponseDtoMapper<CarResponseDto, Car> {
-    private final OwnerRepository ownerRepository;
+    private final OwnerService ownerService;
 
-    public CarMapper(OwnerRepository ownerRepository) {
-        this.ownerRepository = ownerRepository;
+    public CarMapper(OwnerService ownerService) {
+        this.ownerService = ownerService;
     }
 
     @Override
@@ -24,6 +24,7 @@ public class CarMapper implements RequestDtoMapper<CarRequestDto, Car>,
         car.setModel(dto.getModel());
         car.setYear(dto.getYear());
         car.setNumber(dto.getNumber());
+        car.setOwner(ownerService.get(dto.getOwnerId()));
         return car;
     }
 
@@ -35,6 +36,7 @@ public class CarMapper implements RequestDtoMapper<CarRequestDto, Car>,
         dto.setModel(car.getModel());
         dto.setYear(car.getYear());
         dto.setNumber(car.getNumber());
+        dto.setOwnerId(car.getOwner().getId());
         return dto;
     }
 }

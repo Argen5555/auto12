@@ -11,4 +11,5 @@ public class CarResponseDto {
     private String model;
     private Integer year;
     private String number;
+    private Long ownerId;
 }

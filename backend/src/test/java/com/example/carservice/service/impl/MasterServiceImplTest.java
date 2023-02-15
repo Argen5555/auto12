@@ -1,10 +1,14 @@
 package com.example.carservice.service.impl;
 
+import com.example.carservice.model.Master;
+import com.example.carservice.model.Order;
 import com.example.carservice.model.ServiceModel;
-import com.example.carservice.service.ServiceModelService;
+import com.example.carservice.repository.MasterRepository;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
+
+import com.example.carservice.service.ServiceModelService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +23,8 @@ class MasterServiceImplTest {
     private MasterServiceImpl masterService;
 
     @Mock
+    private MasterRepository masterRepository;
+    @Mock
     private ServiceModelService serviceModelService;
 
     @Test
@@ -27,10 +33,15 @@ class MasterServiceImplTest {
         ServiceModel.ServiceStatus serviceStatus = ServiceModel.ServiceStatus.UNPAID;
         ServiceModel firstService = new ServiceModel();
         firstService.setPrice(new BigDecimal(600));
+        firstService.setStatus(serviceStatus);
         ServiceModel secondService = new ServiceModel();
         secondService.setPrice(new BigDecimal(400));
-        Mockito.when(serviceModelService.getAllByMasterIdAndStatus(masterId, serviceStatus))
-                .thenReturn(List.of(firstService, secondService));
+        secondService.setStatus(serviceStatus);
+        Order order = new Order();
+        order.setServices(List.of(firstService, secondService));
+        Master master = new Master();
+        master.setCompletedOrders(List.of(order));
+        Mockito.when(masterRepository.getReferenceById(masterId)).thenReturn(master);
 
         BigDecimal expected = new BigDecimal("400.00");
         BigDecimal actual = masterService.calculateSalary(masterId);

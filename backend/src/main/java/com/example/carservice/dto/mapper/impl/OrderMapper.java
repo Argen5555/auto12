@@ -7,23 +7,23 @@ import com.example.carservice.dto.response.OrderResponseDto;
 import com.example.carservice.model.Goods;
 import com.example.carservice.model.Order;
 import com.example.carservice.model.ServiceModel;
-import com.example.carservice.repository.GoodsRepository;
-import com.example.carservice.repository.ServiceRepository;
 import com.example.carservice.service.CarService;
+import com.example.carservice.service.GoodsService;
+import com.example.carservice.service.ServiceModelService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OrderMapper implements RequestDtoMapper<OrderRequestDto, Order>,
         ResponseDtoMapper<OrderResponseDto, Order> {
-    private final ServiceRepository serviceRepository;
-    private final GoodsRepository goodsRepository;
+    private final ServiceModelService serviceModelService;
+    private final GoodsService goodsService;
     private final CarService carService;
 
-    public OrderMapper(ServiceRepository serviceRepository,
-                       GoodsRepository goodsRepository,
+    public OrderMapper(ServiceModelService serviceModelService,
+                       GoodsService goodsService,
                        CarService carService) {
-        this.serviceRepository = serviceRepository;
-        this.goodsRepository = goodsRepository;
+        this.serviceModelService = serviceModelService;
+        this.goodsService = goodsService;
         this.carService = carService;
     }
 
@@ -34,11 +34,11 @@ public class OrderMapper implements RequestDtoMapper<OrderRequestDto, Order>,
         order.setDescription(dto.getDescription());
         order.setServices(dto.getServiceIds()
                 .stream()
-                .map(serviceRepository::getReferenceById)
+                .map(serviceModelService::get)
                 .toList());
         order.setGoods(dto.getGoodsIds()
                 .stream()
-                .map(goodsRepository::getReferenceById)
+                .map(goodsService::get)
                 .toList());
         order.setStatus(dto.getStatus());
         return order;

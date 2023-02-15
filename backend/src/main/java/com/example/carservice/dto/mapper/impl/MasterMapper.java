@@ -6,26 +6,18 @@ import com.example.carservice.dto.request.MasterRequestDto;
 import com.example.carservice.dto.response.MasterResponseDto;
 import com.example.carservice.model.Master;
 import com.example.carservice.model.Order;
-import com.example.carservice.repository.OrderRepository;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MasterMapper implements RequestDtoMapper<MasterRequestDto, Master>,
         ResponseDtoMapper<MasterResponseDto, Master> {
-    private final OrderRepository orderRepository;
-
-    public MasterMapper(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
 
     @Override
     public Master mapToModel(MasterRequestDto dto) {
         Master master = new Master();
         master.setName(dto.getName());
-        master.setCompletedOrders(dto.getCompleteOrderIds()
-                .stream()
-                .map(orderRepository::getReferenceById)
-                .toList());
+        master.setCompletedOrders(List.of());
         return master;
     }
 

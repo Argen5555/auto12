@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ServiceRequestDto {
+    private Boolean diagnostic;
     private Long orderId;
     private Long masterId;
     private BigDecimal price;

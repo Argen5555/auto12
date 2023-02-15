@@ -13,6 +13,4 @@ public interface ServiceModelService {
     ServiceModel update(ServiceModel service);
 
     ServiceModel updateStatus(Long id, ServiceModel.ServiceStatus status);
-
-    List<ServiceModel> getAllByMasterIdAndStatus(Long masterId, ServiceModel.ServiceStatus status);
 }
