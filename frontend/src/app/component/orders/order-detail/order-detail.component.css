@@ -1,0 +1,38 @@
+.fields-list {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.fields-list li {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 29px;
+}
+
+.fields-list .field-name {
+  margin-right: 20px;
+  flex-basis: 40%;
+  color: #999999;
+  text-align: right;
+}
+
+.fields-list .field-value {
+  flex-basis: 60%;
+}
+
+.small-input {
+  width: 50px;
+}
+.medium-input {
+  width: 150px;
+}
+.big-input {
+  width: 400px;
+}

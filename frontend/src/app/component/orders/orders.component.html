@@ -1,0 +1,27 @@
+<div class="title-navigation">
+  <a href="/">
+    <img class="back-bt" src="./../../assets/images/back.svg">
+  </a>
+  <span class="title-text">Orders</span>
+  <a href="/orders/new">
+    <img class="add-bt" src="./../../assets/images/add.svg">
+  </a>
+</div>
+<div>
+  <ul class="orders-list">
+    <li class="table-header">
+      <div class="col col-1">Id</div>
+      <div class="col col-2">Problem description</div>
+      <div class="col col-3">Status</div>
+      <div class="col col-4">Date</div>
+    </li>
+    <a *ngFor="let order of orders" href="/orders/{{order.id}}">
+      <li class="table-row">
+        <div class="col col-1">{{order.id}}</div>
+        <div class="col col-2">{{order.description}}</div>
+        <div class="col col-3">{{(statusValues[statusKeys.indexOf(order.status)])}}</div>
+        <div class="col col-4">{{order.orderTime | date:'shortDate'}}</div>
+      </li>
+    </a>
+  </ul>
+</div>

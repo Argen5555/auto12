@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
+.title-navigation {
+  height: 120px;
+  padding: 10px 0;
+}
+.title-navigation .back-bt {
+  float: left;
+  margin: 50px;
+}
+.title-navigation .add-bt {
+  float: right;
+  margin: 45px 50px;
+}
+.title-navigation .title-text {
+  text-transform: uppercase;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+  color: #6F6F6F;
+  float: left;
+  margin: 40px 0;
+}
+
+.text-input {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.2rem;
+  border: none;
+  outline: none;
+  display: block;
+  border-bottom: 0.2rem solid #999;
+}
+
+.select-input {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.2rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: block;
+  border-bottom: 0.2rem solid #999;
+  transition: all 150ms ease;
+}
