@@ -10,7 +10,6 @@ import lombok.Setter;
 public class OrderRequestDto {
     private Long carId;
     private String description;
-    private List<Long> serviceIds;
     private List<Long> goodsIds;
     private Order.OrderStatus status;
 }
