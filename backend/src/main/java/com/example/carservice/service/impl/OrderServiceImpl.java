@@ -59,6 +59,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order update(Order order) {
+        Order oldOrder = get(order.getId());
+        order.setOrderTime(oldOrder.getOrderTime());
+        order.setServices(oldOrder.getServices());
+        order.setPrice(oldOrder.getPrice());
+        order.setCompletionTime(oldOrder.getCompletionTime());
         return orderRepository.save(order);
     }
 
@@ -77,7 +82,7 @@ public class OrderServiceImpl implements OrderService {
             masterService.update(masters);
         }
         order.setStatus(status);
-        return update(order);
+        return orderRepository.save(order);
     }
 
     @Override
@@ -86,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal price = calculateGoodsPriceAfterDiscount(order)
                 .add(calculateServicesPriceAfterDiscount(order));
         order.setPrice(price);
-        update(order);
+        orderRepository.save(order);
         return price;
     }
 

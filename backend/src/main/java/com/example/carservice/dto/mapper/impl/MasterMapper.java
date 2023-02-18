@@ -6,7 +6,8 @@ import com.example.carservice.dto.request.MasterRequestDto;
 import com.example.carservice.dto.response.MasterResponseDto;
 import com.example.carservice.model.Master;
 import com.example.carservice.model.Order;
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,7 +18,7 @@ public class MasterMapper implements RequestDtoMapper<MasterRequestDto, Master>,
     public Master mapToModel(MasterRequestDto dto) {
         Master master = new Master();
         master.setName(dto.getName());
-        master.setCompletedOrders(List.of());
+        master.setCompletedOrders(Set.of());
         return master;
     }
 
@@ -29,7 +30,7 @@ public class MasterMapper implements RequestDtoMapper<MasterRequestDto, Master>,
         dto.setCompleteOrderIds(master.getCompletedOrders()
                 .stream()
                 .map(Order::getId)
-                .toList());
+                .collect(Collectors.toSet()));
         return dto;
     }
 }

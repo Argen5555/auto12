@@ -4,6 +4,7 @@ import com.example.carservice.model.Master;
 import com.example.carservice.model.Order;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 public interface MasterService {
     List<Master> getAll();
@@ -16,7 +17,7 @@ public interface MasterService {
 
     List<Master> update(Iterable<Master> masters);
 
-    List<Order> getOrders(Long id);
+    Set<Order> getOrders(Long id);
 
     BigDecimal calculateSalary(Long id);
 }

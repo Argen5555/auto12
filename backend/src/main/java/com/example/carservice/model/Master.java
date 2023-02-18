@@ -1,6 +1,6 @@
 package com.example.carservice.model;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,5 +25,5 @@ public class Master {
     @JoinTable(name = "masters_complected_orders",
             joinColumns = @JoinColumn(name = "master_id"),
             inverseJoinColumns = @JoinColumn(name = "complected_order_id"))
-    private List<Order> completedOrders;
+    private Set<Order> completedOrders;
 }

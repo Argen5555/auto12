@@ -9,20 +9,17 @@ import com.example.carservice.model.Order;
 import com.example.carservice.model.ServiceModel;
 import com.example.carservice.service.CarService;
 import com.example.carservice.service.GoodsService;
-import com.example.carservice.service.ServiceModelService;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OrderMapper implements RequestDtoMapper<OrderRequestDto, Order>,
         ResponseDtoMapper<OrderResponseDto, Order> {
-    private final ServiceModelService serviceModelService;
     private final GoodsService goodsService;
     private final CarService carService;
 
-    public OrderMapper(ServiceModelService serviceModelService,
-                       GoodsService goodsService,
+    public OrderMapper(GoodsService goodsService,
                        CarService carService) {
-        this.serviceModelService = serviceModelService;
         this.goodsService = goodsService;
         this.carService = carService;
     }
@@ -32,10 +29,7 @@ public class OrderMapper implements RequestDtoMapper<OrderRequestDto, Order>,
         Order order = new Order();
         order.setCar(carService.get(dto.getCarId()));
         order.setDescription(dto.getDescription());
-        order.setServices(dto.getServiceIds()
-                .stream()
-                .map(serviceModelService::get)
-                .toList());
+        order.setServices(List.of());
         order.setGoods(dto.getGoodsIds()
                 .stream()
                 .map(goodsService::get)
