@@ -7,8 +7,6 @@ create table orders_goods
         constraint fkaoqjqu5li3448xo657dvp6teq
             references orders,
     goods_id bigint not null
-        constraint uk_934k2svq65pdcoo9o9j3lokxi
-            unique
         constraint fknsv6m7fvy9pmg1b122f7o62x1
             references goods
 );
