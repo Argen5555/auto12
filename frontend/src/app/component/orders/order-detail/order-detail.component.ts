@@ -45,7 +45,13 @@ export class OrderDetailComponent implements OnInit {
   }
 
   updateOrder(): void {
-    this.orderService.updateOrder(this.id, this.order)
+    const body = {
+      carId: this.order.carId,
+      description: this.order.description,
+      goodsIds: this.order.goodsIds,
+      status: this.order.status
+    }
+    this.orderService.updateOrder(this.id, body)
       .subscribe(order => this.order = order);
     this.isOrderChanged = false;
     this.isStatusChanged = false;

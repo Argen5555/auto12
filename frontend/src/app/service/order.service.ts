@@ -28,14 +28,12 @@ export class OrderService {
     return this.http.get<number>(url);
   }
 
-  updateOrder(id: number, order: Order): Observable<Order> {
+  saveOrder(body: {}): Observable<Order> {
+    return this.http.post<Order>(this.ordersUrl, body, this.httpOptions);
+  }
+
+  updateOrder(id: number, body: {}): Observable<Order> {
     const url = `${this.ordersUrl}/${id}`;
-    const body = {
-      carId: order.carId,
-      description: order.description,
-      goodsIds: order.goodsIds,
-      status: order.status
-    }
     return this.http.post<Order>(url, body, this.httpOptions);
   }
 

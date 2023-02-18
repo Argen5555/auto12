@@ -9,34 +9,31 @@
     <li>
       <div class="field-name">Car id</div>
       <div class="field-value">
-        <input type="text" class="text-input small-input">
+        <input type="text" class="text-input small-input" [(ngModel)]="carId">
       </div>
     </li>
     <li>
       <div class="field-name">Description</div>
       <div class="field-value">
-        <input type="text" class="text-input big-input">
-      </div>
-    </li>
-    <li>
-      <div class="field-name">Service ids</div>
-      <div class="field-value">
-        <input type="text" class="text-input medium-input">
+        <input type="text" class="text-input big-input" [(ngModel)]="description">
       </div>
     </li>
     <li>
       <div class="field-name">Goods ids</div>
       <div class="field-value">
-        <input type="text" class="text-input medium-input">
+        <input type="text" class="text-input medium-input" [(ngModel)]="goodsIds">
       </div>
     </li>
     <li>
       <div class="field-name">Status</div>
       <div class="field-value">
-        <select class="select-input">
+        <select class="select-input" [(ngModel)]="orderStatus">
           <option *ngFor="let status of statusKeys; let i = index" value="{{status}}">{{(statusValues[i])}}</option>
         </select>
       </div>
     </li>
   </ul>
+</div>
+<div class="button-list">
+  <button (click)="saveOrder()">Save new order</button>
 </div>
