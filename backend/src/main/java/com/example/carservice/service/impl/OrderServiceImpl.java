@@ -59,6 +59,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order update(Order order) {
+        Order oldOrder = get(order.getId());
+        order.setOrderTime(oldOrder.getOrderTime());
+        order.setPrice(oldOrder.getPrice());
+        order.setCompletionTime(oldOrder.getCompletionTime());
         return orderRepository.save(order);
     }
 

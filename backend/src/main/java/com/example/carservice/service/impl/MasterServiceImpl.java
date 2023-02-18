@@ -39,6 +39,8 @@ public class MasterServiceImpl implements MasterService {
 
     @Override
     public Master update(Master master) {
+        Master oldMaster = get(master.getId());
+        master.setCompletedOrders(oldMaster.getCompletedOrders());
         return masterRepository.save(master);
     }
 
