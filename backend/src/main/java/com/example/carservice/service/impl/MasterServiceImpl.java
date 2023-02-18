@@ -8,6 +8,7 @@ import com.example.carservice.service.MasterService;
 import com.example.carservice.service.ServiceModelService;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -50,7 +51,7 @@ public class MasterServiceImpl implements MasterService {
     }
 
     @Override
-    public List<Order> getOrders(Long id) {
+    public Set<Order> getOrders(Long id) {
         return masterRepository.getReferenceById(id).getCompletedOrders();
     }
 

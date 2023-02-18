@@ -7,7 +7,7 @@ import com.example.carservice.repository.MasterRepository;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
-
+import java.util.Set;
 import com.example.carservice.service.ServiceModelService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class MasterServiceImplTest {
         Order order = new Order();
         order.setServices(List.of(firstService, secondService));
         Master master = new Master();
-        master.setCompletedOrders(List.of(order));
+        master.setCompletedOrders(Set.of(order));
         Mockito.when(masterRepository.getReferenceById(masterId)).thenReturn(master);
 
         BigDecimal expected = new BigDecimal("400.00");
