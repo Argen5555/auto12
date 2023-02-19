@@ -1,0 +1,25 @@
+<div class="title-navigation">
+  <a href="/">
+    <img class="back-bt" src="./../../assets/images/back.svg">
+  </a>
+  <span class="title-text">Masters</span>
+  <a href="/masters/new">
+    <img class="add-bt" src="./../../assets/images/add.svg">
+  </a>
+</div>
+<div>
+  <ul class="orders-list">
+    <li class="table-header">
+      <div class="col col-1">Id</div>
+      <div class="col col-2">Name</div>
+      <div class="col col-3">Completed orders count</div>
+    </li>
+    <a *ngFor="let master of masters" href="/masters/{{master.id}}">
+      <li class="table-row">
+        <div class="col col-1">{{master.id}}</div>
+        <div class="col col-2">{{master.name}}</div>
+        <div class="col col-3">{{master.completedOrderIds.length}}</div>
+      </li>
+    </a>
+  </ul>
+</div>
