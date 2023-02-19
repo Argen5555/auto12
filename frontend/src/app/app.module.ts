@@ -9,6 +9,8 @@ import { MenuComponent } from './component/menu/menu.component';
 import { OrderDetailComponent } from './component/orders/order-detail/order-detail.component';
 import { OrdersComponent } from './component/orders/orders.component';
 import { NewOrderComponent } from './component/orders/new-order/new-order.component';
+import { MastersComponent } from './component/masters/masters.component';
+import { MasterDetailComponent } from './component/masters/master-detail/master-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { NewOrderComponent } from './component/orders/new-order/new-order.compon
     MenuComponent,
     OrdersComponent,
     OrderDetailComponent,
-    NewOrderComponent
+    NewOrderComponent,
+    MastersComponent,
+    MasterDetailComponent
   ],
   imports: [
     BrowserModule,

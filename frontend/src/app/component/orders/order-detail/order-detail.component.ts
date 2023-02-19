@@ -48,7 +48,7 @@ export class OrderDetailComponent implements OnInit {
     const body = {
       carId: this.order.carId,
       description: this.order.description,
-      goodsIds: this.order.goodsIds,
+      goodsIds: this.order.goodsIds.toString().split(','), 
       status: this.order.status
     }
     this.orderService.updateOrder(this.id, body)

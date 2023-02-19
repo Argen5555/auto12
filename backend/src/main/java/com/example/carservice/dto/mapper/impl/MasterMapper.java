@@ -27,7 +27,7 @@ public class MasterMapper implements RequestDtoMapper<MasterRequestDto, Master>,
         MasterResponseDto dto = new MasterResponseDto();
         dto.setId(master.getId());
         dto.setName(master.getName());
-        dto.setCompleteOrderIds(master.getCompletedOrders()
+        dto.setCompletedOrderIds(master.getCompletedOrders()
                 .stream()
                 .map(Order::getId)
                 .collect(Collectors.toSet()));
