@@ -9,6 +9,8 @@ import { MasterService } from 'src/app/service/master.service';
 })
 export class MastersComponent implements OnInit {
   masters: Master[] = [];
+  selectedMasterId: number | undefined;
+  creatingNewMaster: boolean = false;
 
   constructor(private masterService: MasterService) {}
 
@@ -18,6 +20,27 @@ export class MastersComponent implements OnInit {
 
   getMasters(): void {
     this.masterService.getMasters()
-      .subscribe(masters => this.masters = masters);
+      .subscribe(masters => {
+        this.masters = masters;
+        this.masters.sort((m1, m2) => m1.id - m2.id);
+      });
+  }
+
+  selectMaster(id: number): void {
+    this.selectedMasterId = id;
+    this.creatingNewMaster = false;
+  }
+
+  toCreatingMode(): void {
+    this.creatingNewMaster = true;
+    this.selectedMasterId = undefined;
+  }
+
+  updateMasterInList(master: Master): void {
+    for (let i = 0; i < this.masters.length; i++) {
+      if (this.masters[i].id == master.id) {
+        this.masters[i] = master;
+      }
+    }
   }
 }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { OrderStatus } from 'src/app/model/order';
 import { OrderService } from 'src/app/service/order.service';
 
@@ -16,9 +15,7 @@ export class NewOrderComponent {
   statusKeys = Object.keys(OrderStatus);
   statusValues = Object.values(OrderStatus);
 
-  constructor(
-    private orderService: OrderService,
-    private router: Router) {}
+  constructor(private orderService: OrderService) {}
 
   saveOrder(): void {
     const body = {
@@ -28,6 +25,6 @@ export class NewOrderComponent {
       status: this.orderStatus
     }
     this.orderService.saveOrder(body)
-      .subscribe(order => this.router.navigate(['orders/' + order.id]));
+      .subscribe(order => window.location.reload());
   }
 }

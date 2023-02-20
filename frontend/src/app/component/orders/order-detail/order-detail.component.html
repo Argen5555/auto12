@@ -1,15 +1,6 @@
-<div class="title-navigation">
-  <a href="/orders">
-    <img class="back-bt" src="./../../assets/images/back.svg">
-  </a>
-  <span class="title-text">Order {{id}}</span>
-</div>
+<span class="title-text">Order {{id}}</span>
 <div *ngIf="order">
   <ul class="fields-list">
-    <li>
-      <div class="field-name">Id</div>
-      <div class="field-value">{{order.id}}</div>
-    </li>
     <li>
       <div class="field-name">Car id</div>
       <div class="field-value">
@@ -25,6 +16,11 @@
     <li>
       <div class="field-name">Order time</div>
       <div class="field-value">{{order.orderTime | date:'short'}}</div>
+    </li>
+    <li>
+      <div class="field-name">Completion time</div>
+      <div class="field-value" *ngIf="order.completionTime">{{order.completionTime | date:'short'}}</div>
+      <div class="field-value" *ngIf="!order.completionTime"> - </div>
     </li>
     <li>
       <div class="field-name">Service ids</div>
@@ -49,14 +45,9 @@
       <div class="field-value" *ngIf="order.price">{{order.price | currency:'₴'}}</div>
       <div class="field-value" *ngIf="!order.price"> - </div>
     </li>
-    <li>
-      <div class="field-name">Completion time</div>
-      <div class="field-value" *ngIf="order.completionTime">{{order.completionTime | date:'short'}}</div>
-      <div class="field-value" *ngIf="!order.completionTime"> - </div>
-    </li>
   </ul>
 </div>
-<div class="button-list">
+<div *ngIf="order" class="button-list">
   <button (click)="calculatePrice()">Calculate price</button>
   <button *ngIf="isStatusChanged" (click)="updateStatus()">Update status only</button>
   <button *ngIf="isOrderChanged" (click)="updateOrder()">Update order</button>

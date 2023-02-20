@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 
 .title-navigation {
-  height: 120px;
+  height: 80px;
   padding: 10px 0;
+  margin-bottom: 30px;
 }
 .title-navigation .back-bt {
   float: left;
-  margin: 50px;
+  margin: 30px;
 }
 .title-navigation .add-bt {
   float: right;
-  margin: 45px 50px;
+  margin: 25px 50px;
+  cursor: pointer;
 }
 .title-navigation .title-text {
   text-transform: uppercase;
@@ -21,7 +23,7 @@
   line-height: 48px;
   color: #6F6F6F;
   float: left;
-  margin: 40px 0;
+  margin: 20px 0;
 }
 
 .text-input {
@@ -50,4 +52,22 @@
   display: block;
   border-bottom: 0.2rem solid #999;
   transition: all 150ms ease;
+}
+
+.button-list {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+}
+.button-list button {
+  cursor: pointer;
+  margin: 6px;
+  padding: 6px 10px;
+  background-color: #F5F5F5;
+  border: #6F6F6F solid 1px;
+  border-radius: 5px;
+}
+.button-list button:hover {
+  margin: 5px;
+  border-width: 2px;
 }

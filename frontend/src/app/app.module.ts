@@ -11,6 +11,7 @@ import { OrdersComponent } from './component/orders/orders.component';
 import { NewOrderComponent } from './component/orders/new-order/new-order.component';
 import { MastersComponent } from './component/masters/masters.component';
 import { MasterDetailComponent } from './component/masters/master-detail/master-detail.component';
+import { NewMasterComponent } from './component/masters/new-master/new-master.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MasterDetailComponent } from './component/masters/master-detail/master-
     OrderDetailComponent,
     NewOrderComponent,
     MastersComponent,
-    MasterDetailComponent
+    MasterDetailComponent,
+    NewMasterComponent
   ],
   imports: [
     BrowserModule,

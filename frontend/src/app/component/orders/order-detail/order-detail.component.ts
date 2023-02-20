@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Order, OrderStatus } from 'src/app/model/order';
 import { OrderService } from 'src/app/service/order.service';
+import { OrdersComponent } from '../orders.component';
 
 @Component({
   selector: 'app-order-detail',
   templateUrl: './order-detail.component.html',
   styleUrls: ['./order-detail.component.css']
 })
-export class OrderDetailComponent implements OnInit {
-  id: number;
+export class OrderDetailComponent implements OnChanges {
+  @Input()
+  id!: number;
   order!: Order;
   statusKeys = Object.keys(OrderStatus);
   statusValues = Object.values(OrderStatus);
@@ -17,13 +18,13 @@ export class OrderDetailComponent implements OnInit {
   isStatusChanged: boolean = false;
 
   constructor(
-    private orderService: OrderService,
-    private route: ActivatedRoute) {
-    this.id = parseInt(route.snapshot.paramMap.get('id')!);
-  }
-  
-  ngOnInit(): void {
-    this.getOrder();
+    private ordersComponent: OrdersComponent,
+    private orderService: OrderService) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.id != null) {
+      this.getOrder();
+    }
   }
 
   orderChanged(): void {
@@ -44,6 +45,11 @@ export class OrderDetailComponent implements OnInit {
       .subscribe(price => this.order.price = price);
   }
 
+  setOrder(order: Order): void {
+    this.order = order;
+    this.ordersComponent.updateOrderInList(order);
+  }
+
   updateOrder(): void {
     const body = {
       carId: this.order.carId,
@@ -52,14 +58,14 @@ export class OrderDetailComponent implements OnInit {
       status: this.order.status
     }
     this.orderService.updateOrder(this.id, body)
-      .subscribe(order => this.order = order);
+      .subscribe(order => this.setOrder(order));
     this.isOrderChanged = false;
     this.isStatusChanged = false;
   }
 
   updateStatus(): void {
     this.orderService.updateStatus(this.id, this.order.status)
-      .subscribe(order => this.order = order);
+      .subscribe(order => this.setOrder(order));
     this.isOrderChanged = false;
     this.isStatusChanged = false;
   }

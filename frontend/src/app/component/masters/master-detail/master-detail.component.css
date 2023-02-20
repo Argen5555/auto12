@@ -1,3 +1,14 @@
+.title-text {
+  display: table;
+  margin: 30px auto 20px auto;
+  text-transform: uppercase;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 29px;
+}
+
 .fields-list {
   margin-left: auto;
   margin-right: auto;
@@ -18,13 +29,13 @@
 
 .fields-list .field-name {
   margin-right: 20px;
-  flex-basis: 50%;
+  flex-basis: 40%;
   color: #999999;
   text-align: right;
 }
 
 .fields-list .field-value {
-  flex-basis: 50%;
+  flex-basis: 60%;
 }
 
 .small-input {
@@ -34,5 +45,17 @@
   width: 150px;
 }
 .big-input {
-  width: 400px;
+  width: 300px;
+}
+
+.master-orders-list {
+  max-width: 350px;
+  max-height: 200px;
+  padding: 0;
+  overflow: auto;
+  border: #999 solid 1px;
+  border-radius: 5px;
+}
+.master-orders-list li {
+  margin: 5px 10px;
 }

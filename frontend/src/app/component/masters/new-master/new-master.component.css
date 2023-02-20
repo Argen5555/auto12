@@ -29,13 +29,13 @@
 
 .fields-list .field-name {
   margin-right: 20px;
-  flex-basis: 30%;
+  flex-basis: 40%;
   color: #999;
   text-align: right;
 }
 
 .fields-list .field-value {
-  flex-basis: 70%;
+  flex-basis: 60%;
 }
 
 .small-input {
@@ -47,3 +47,4 @@
 .big-input {
   width: 350px;
 }
+

@@ -3,23 +3,27 @@
     <img class="back-bt" src="./../../assets/images/back.svg">
   </a>
   <span class="title-text">Masters</span>
-  <a href="/masters/new">
-    <img class="add-bt" src="./../../assets/images/add.svg">
-  </a>
+  <img (click)="toCreatingMode()" class="add-bt" src="./../../assets/images/add.svg">
 </div>
 <div>
-  <ul class="orders-list">
-    <li class="table-header">
-      <div class="col col-1">Id</div>
-      <div class="col col-2">Name</div>
-      <div class="col col-3">Completed orders count</div>
-    </li>
-    <a *ngFor="let master of masters" href="/masters/{{master.id}}">
-      <li class="table-row">
-        <div class="col col-1">{{master.id}}</div>
-        <div class="col col-2">{{master.name}}</div>
-        <div class="col col-3">{{master.completedOrderIds.length}}</div>
+  <div class="masters-block">
+    <ul class="masters-list">
+      <li class="table-header">
+        <div class="col-1">Id</div>
+        <div class="col-2">Name</div>
+        <div class="col-3">Completed orders</div>
       </li>
-    </a>
-  </ul>
+      <li *ngFor="let master of masters" class="table-item" (click)="selectMaster(master.id)"
+      [ngStyle]="{'border-color': master.id == selectedMasterId ? '#999' : '#FFF'}">
+        <div class="col-1">{{master.id}}</div>
+        <div class="col-2">{{master.name}}</div>
+        <div class="col-3">{{master.completedOrderIds.length}}</div>
+      </li>
+    </ul>
+  </div>
+  <div class="master-detail-block">
+    <span *ngIf="!selectedMasterId && !creatingNewMaster" class="master-detail-message">You have not selected any master</span>
+    <app-master-detail *ngIf="selectedMasterId" [id]="selectedMasterId"></app-master-detail>
+    <app-new-master *ngIf="creatingNewMaster"></app-new-master>
+  </div>
 </div>

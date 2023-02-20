@@ -1,10 +1,9 @@
-.orders-list {
+.masters-list {
   margin: 0 auto;
   padding: 0 10%;
-  max-width: 1400px;
 }
 
-.orders-list li {
+.masters-list li {
   border-radius: 3px;
   display: flex;
   justify-content: space-between;
@@ -15,28 +14,51 @@
   font-size: 20px;
   line-height: 29px;
 }
-.orders-list a {
+.masters-list a {
   text-decoration: none;
   color: #6F6F6F;
 }
-.orders-list .table-header {
+.masters-list .table-header {
   padding: 0 30px;
   margin-bottom: 10px;
   text-transform: uppercase;
   font-size: 14px;
   color: #999999;
 }
-.orders-list .table-row {
-  padding: 16px 25px;
+.masters-list .table-item {
+  cursor: pointer;
+  padding: 12px 20px;
   background: #F5F5F5;
   border-radius: 16px;
+  border: solid 2px;
 }
-.orders-list .col-1 {
+.masters-list .col-1 {
   flex-basis: 10%;
 }
-.orders-list .col-2 {
+.masters-list .col-2 {
   flex-basis: 60%;
 }
-.orders-list .col-3 {
+.masters-list .col-3 {
   flex-basis: 30%;
+}
+
+.masters-block {
+  float: left;
+  width: 50%;
+  height: 80vh;
+  overflow: auto;
+}
+.master-detail-block {
+  float: right;
+  width: 50%;
+}
+.master-detail-message {
+  display: table;
+  margin: 10% 45% 0 30%;
+  text-align: center;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 29px;
 }
