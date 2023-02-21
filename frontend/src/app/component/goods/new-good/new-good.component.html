@@ -1,0 +1,20 @@
+<span class="title-text">New Good</span>
+<div>
+  <ul class="fields-list">
+    <li>
+      <div class="field-name">Name</div>
+      <div class="field-value">
+        <input type="text" class="text-input medium-input" [(ngModel)]="name">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Price</div>
+      <div class="field-value">
+        <input type="text" class="text-input medium-input" [(ngModel)]="price">
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="button-list">
+  <button (click)="saveGood()">Save new good</button>
+</div>

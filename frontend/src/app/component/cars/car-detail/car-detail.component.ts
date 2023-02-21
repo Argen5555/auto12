@@ -15,16 +15,16 @@ export class CarDetailComponent implements OnChanges {
   isCarChanged: boolean = false;
 
   constructor(
-    private carComponent: CarsComponent,
+    private carsComponent: CarsComponent,
     private carService: CarService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.id != null) {
-      this.getMaster();
+      this.getCar();
     }
   }
 
-  getMaster(): void {
+  getCar(): void {
     this.carService.getCar(this.id)
       .subscribe(car => this.car = car);
   }
@@ -44,7 +44,7 @@ export class CarDetailComponent implements OnChanges {
     this.carService.updateCar(this.id, body)
       .subscribe(car => {
         this.car = car;
-        this.carComponent.updateCarInList(car);
+        this.carsComponent.updateCarInList(car);
       });
     this.isCarChanged = false;
   }

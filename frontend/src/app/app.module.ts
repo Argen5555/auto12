@@ -15,6 +15,9 @@ import { NewMasterComponent } from './component/masters/new-master/new-master.co
 import { CarsComponent } from './component/cars/cars.component';
 import { CarDetailComponent } from './component/cars/car-detail/car-detail.component';
 import { NewCarComponent } from './component/cars/new-car/new-car.component';
+import { GoodsComponent } from './component/goods/goods.component';
+import { GoodDetailComponent } from './component/goods/good-detail/good-detail.component';
+import { NewGoodComponent } from './component/goods/new-good/new-good.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { NewCarComponent } from './component/cars/new-car/new-car.component';
     NewMasterComponent,
     CarsComponent,
     CarDetailComponent,
-    NewCarComponent
+    NewCarComponent,
+    GoodsComponent,
+    GoodDetailComponent,
+    NewGoodComponent
   ],
   imports: [
     BrowserModule,
