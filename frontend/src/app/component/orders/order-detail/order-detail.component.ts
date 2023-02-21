@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Order, OrderStatus } from 'src/app/model/order';
 import { OrderService } from 'src/app/service/order.service';
 import { OrdersComponent } from '../orders.component';
@@ -9,7 +9,6 @@ import { OrdersComponent } from '../orders.component';
   styleUrls: ['./order-detail.component.css']
 })
 export class OrderDetailComponent implements OnChanges {
-  @Input()
   id!: number;
   order!: Order;
   statusKeys = Object.keys(OrderStatus);
@@ -25,6 +24,12 @@ export class OrderDetailComponent implements OnChanges {
     if (this.id != null) {
       this.getOrder();
     }
+  }
+
+  @Input() set orderId(value: number) {
+    this.id = value;
+    this.isOrderChanged = false;
+    this.isStatusChanged = false;
   }
 
   orderChanged(): void {

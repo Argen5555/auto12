@@ -2,10 +2,6 @@
 <div *ngIf="good">
   <ul class="fields-list">
     <li>
-      <div class="field-name">Id</div>
-      <div class="field-value">{{good.id}}</div>
-    </li>
-    <li>
       <div class="field-name">Name</div>
       <div class="field-value">
         <input type="text" class="text-input big-input" [(ngModel)]="good.name" (ngModelChange)="goodChanged()">

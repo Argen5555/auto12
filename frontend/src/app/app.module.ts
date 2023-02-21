@@ -18,6 +18,9 @@ import { NewCarComponent } from './component/cars/new-car/new-car.component';
 import { GoodsComponent } from './component/goods/goods.component';
 import { GoodDetailComponent } from './component/goods/good-detail/good-detail.component';
 import { NewGoodComponent } from './component/goods/new-good/new-good.component';
+import { ServicesComponent } from './component/services/services.component';
+import { NewServiceComponent } from './component/services/new-service/new-service.component';
+import { ServiceDetailComponent } from './component/services/service-detail/service-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { NewGoodComponent } from './component/goods/new-good/new-good.component'
     NewCarComponent,
     GoodsComponent,
     GoodDetailComponent,
-    NewGoodComponent
+    NewGoodComponent,
+    ServicesComponent,
+    NewServiceComponent,
+    ServiceDetailComponent
   ],
   imports: [
     BrowserModule,

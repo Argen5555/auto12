@@ -2,10 +2,6 @@
 <div *ngIf="master">
   <ul class="fields-list">
     <li>
-      <div class="field-name">Id</div>
-      <div class="field-value">{{master.id}}</div>
-    </li>
-    <li>
       <div class="field-name">Name</div>
       <div class="field-value">
         <input type="text" class="text-input big-input" [(ngModel)]="master.name" (ngModelChange)="masterChanged()">

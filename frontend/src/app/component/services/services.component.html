@@ -1,0 +1,35 @@
+<div class="title-navigation">
+  <a href="/">
+    <img class="back-bt" src="./../../assets/images/back.svg">
+  </a>
+  <span class="title-text">Services</span>
+  <img (click)="toCreatingMode()" class="add-bt" src="./../../assets/images/add.svg">
+</div>
+<div>
+  <div class="services-block">
+    <ul class="services-list">
+      <li class="table-header">
+        <div class="col-1 header">Id</div>
+        <div class="col-2 header">Diagnostic</div>
+        <div class="col-3 header">Order id</div>
+        <div class="col-4 header">Master id</div>
+        <div class="col-5 header">Price</div>
+        <div class="col-6 header">Status</div>
+      </li>
+      <li *ngFor="let service of services" class="table-item" (click)="selectService(service.id)"
+      [ngStyle]="{'border-color': service.id == selectedServiceId ? '#999' : '#FFF'}">
+        <div class="col-1">{{service.id}}</div>
+        <div class="col-2">{{service.diagnostic}}</div>
+        <div class="col-3">{{service.orderId}}</div>
+        <div class="col-4">{{service.masterId}}</div>
+        <div class="col-5">{{service.price}}</div>
+        <div class="col-6">{{(statusValues[statusKeys.indexOf(service.status)])}}</div>
+      </li>
+    </ul>
+  </div>
+  <div class="service-detail-block">
+    <span *ngIf="!selectedServiceId && !creatingNewService" class="service-detail-message">You have not selected any service</span>
+    <app-service-detail *ngIf="selectedServiceId" [serviceId]="selectedServiceId"></app-service-detail>
+    <app-new-service *ngIf="creatingNewService"></app-new-service>
+  </div>
+</div>

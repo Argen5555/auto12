@@ -26,7 +26,7 @@
   </div>
   <div class="order-detail-block">
     <span *ngIf="!selectedOrderId && !creatingNewOrder" class="order-detail-message">You have not selected any order</span>
-    <app-order-detail *ngIf="selectedOrderId" [id]="selectedOrderId"></app-order-detail>
+    <app-order-detail *ngIf="selectedOrderId" [orderId]="selectedOrderId"></app-order-detail>
     <app-new-order *ngIf="creatingNewOrder"></app-new-order>
   </div>
 </div>

@@ -10,11 +10,10 @@ import { MastersComponent } from '../masters.component';
   styleUrls: ['./master-detail.component.css']
 })
 export class MasterDetailComponent implements OnChanges {
-  @Input()
   id!: number;
   master!: Master;
   salary!: number;
-  orders!: Order[];
+  orders: Order[] | undefined;
   isMasterChanged: boolean = false;
 
   constructor(
@@ -25,6 +24,12 @@ export class MasterDetailComponent implements OnChanges {
     if (this.id != null) {
       this.getMaster();
     }
+  }
+
+  @Input() set masterId(value: number) {
+    this.id = value;
+    this.isMasterChanged = false;
+    this.orders = undefined;
   }
 
   getMaster(): void {

@@ -9,7 +9,6 @@ import { CarsComponent } from '../cars.component';
   styleUrls: ['./car-detail.component.css']
 })
 export class CarDetailComponent implements OnChanges {
-  @Input()
   id!: number;
   car!: Car;
   isCarChanged: boolean = false;
@@ -22,6 +21,11 @@ export class CarDetailComponent implements OnChanges {
     if (this.id != null) {
       this.getCar();
     }
+  }
+
+  @Input() set carId(value: number) {
+    this.id = value;
+    this.isCarChanged = false;
   }
 
   getCar(): void {

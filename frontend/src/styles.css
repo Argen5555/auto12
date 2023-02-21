@@ -26,6 +26,10 @@
   margin: 20px 0;
 }
 
+.checkbox-input {
+  accent-color: #6F6F6F;
+}
+
 .text-input {
   font-family: 'Montserrat';
   font-style: normal;

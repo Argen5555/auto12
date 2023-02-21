@@ -25,7 +25,7 @@
   </div>
   <div class="car-detail-block">
     <span *ngIf="!selectedCarId && !creatingNewCar" class="car-detail-message">You have not selected any car</span>
-    <app-car-detail *ngIf="selectedCarId" [id]="selectedCarId"></app-car-detail>
+    <app-car-detail *ngIf="selectedCarId" [carId]="selectedCarId"></app-car-detail>
     <app-new-car *ngIf="creatingNewCar"></app-new-car>
   </div>
 </div>

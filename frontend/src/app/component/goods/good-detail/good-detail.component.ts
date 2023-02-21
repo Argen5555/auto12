@@ -9,7 +9,6 @@ import { GoodsComponent } from '../goods.component';
   styleUrls: ['./good-detail.component.css']
 })
 export class GoodDetailComponent implements OnChanges {
-  @Input()
   id!: number;
   good!: Good;
   isGoodChanged: boolean = false;
@@ -22,6 +21,11 @@ export class GoodDetailComponent implements OnChanges {
     if (this.id != null) {
       this.getGood();
     }
+  }
+
+  @Input() set goodId(value: number) {
+    this.id = value;
+    this.isGoodChanged = false;
   }
 
   getGood(): void {

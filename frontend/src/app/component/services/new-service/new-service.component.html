@@ -1,0 +1,40 @@
+<span class="title-text">New Service</span>
+<div>
+  <ul class="fields-list">
+    <li>
+      <div class="field-name">Diagnostic</div>
+      <div class="field-value">
+        <input type="checkbox" class="checkbox-input" [(ngModel)]="diagnostic">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Order id</div>
+      <div class="field-value">
+        <input type="text" class="text-input small-input" [(ngModel)]="orderId">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Master id</div>
+      <div class="field-value">
+        <input type="text" class="text-input small-input" [(ngModel)]="masterId">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Price</div>
+      <div class="field-value">
+        <input type="text" class="text-input medium-input" [(ngModel)]="price">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Status</div>
+      <div class="field-value">
+        <select class="select-input" [(ngModel)]="serviceStatus">
+          <option *ngFor="let status of statusKeys; let i = index" value="{{status}}">{{(statusValues[i])}}</option>
+        </select>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="button-list">
+  <button (click)="saveService()">Save new service</button>
+</div>

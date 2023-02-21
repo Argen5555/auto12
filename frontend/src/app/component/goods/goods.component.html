@@ -23,7 +23,7 @@
   </div>
   <div class="good-detail-block">
     <span *ngIf="!selectedGoodId && !creatingNewGood" class="good-detail-message">You have not selected any car</span>
-    <app-good-detail *ngIf="selectedGoodId" [id]="selectedGoodId"></app-good-detail>
+    <app-good-detail *ngIf="selectedGoodId" [goodId]="selectedGoodId"></app-good-detail>
     <app-new-good *ngIf="creatingNewGood"></app-new-good>
   </div>
 </div>
