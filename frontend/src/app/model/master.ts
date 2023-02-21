@@ -1,5 +1,5 @@
 export interface Master {
-  id: number,
-  name: string,
-  completedOrderIds: number[]
+  id: number;
+  name: string;
+  completedOrderIds: number[];
 }

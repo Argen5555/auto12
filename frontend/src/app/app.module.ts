@@ -12,6 +12,9 @@ import { NewOrderComponent } from './component/orders/new-order/new-order.compon
 import { MastersComponent } from './component/masters/masters.component';
 import { MasterDetailComponent } from './component/masters/master-detail/master-detail.component';
 import { NewMasterComponent } from './component/masters/new-master/new-master.component';
+import { CarsComponent } from './component/cars/cars.component';
+import { CarDetailComponent } from './component/cars/car-detail/car-detail.component';
+import { NewCarComponent } from './component/cars/new-car/new-car.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { NewMasterComponent } from './component/masters/new-master/new-master.co
     NewOrderComponent,
     MastersComponent,
     MasterDetailComponent,
-    NewMasterComponent
+    NewMasterComponent,
+    CarsComponent,
+    CarDetailComponent,
+    NewCarComponent
   ],
   imports: [
     BrowserModule,

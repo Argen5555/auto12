@@ -1,0 +1,38 @@
+<span class="title-text">New Car</span>
+<div>
+  <ul class="fields-list">
+    <li>
+      <div class="field-name">Brand</div>
+      <div class="field-value">
+        <input type="text" class="text-input medium-input" [(ngModel)]="brand">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Model</div>
+      <div class="field-value">
+        <input type="text" class="text-input medium-input" [(ngModel)]="model">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Year</div>
+      <div class="field-value">
+        <input type="text" class="text-input small-input" [(ngModel)]="year">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Number</div>
+      <div class="field-value">
+        <input type="text" class="text-input medium-input" [(ngModel)]="number">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Owner id</div>
+      <div class="field-value">
+        <input type="text" class="text-input small-input" [(ngModel)]="ownerId">
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="button-list">
+  <button (click)="saveCar()">Save new car</button>
+</div>

@@ -1,0 +1,31 @@
+<div class="title-navigation">
+  <a href="/">
+    <img class="back-bt" src="./../../assets/images/back.svg">
+  </a>
+  <span class="title-text">Cars</span>
+  <img (click)="toCreatingMode()" class="add-bt" src="./../../assets/images/add.svg">
+</div>
+<div>
+  <div class="cars-block">
+    <ul class="cars-list">
+      <li class="table-header">
+        <div class="col-1">Id</div>
+        <div class="col-2">Brand / Model</div>
+        <div class="col-3">Number</div>
+        <div class="col-4">Owner id</div>
+      </li>
+      <li *ngFor="let car of cars" class="table-item" (click)="selectCar(car.id)"
+      [ngStyle]="{'border-color': car.id == selectedCarId ? '#999' : '#FFF'}">
+        <div class="col-1">{{car.id}}</div>
+        <div class="col-2">{{car.brand}} {{car.model}}</div>
+        <div class="col-3">{{car.number}}</div>
+        <div class="col-4">{{car.ownerId}}</div>
+      </li>
+    </ul>
+  </div>
+  <div class="car-detail-block">
+    <span *ngIf="!selectedCarId && !creatingNewCar" class="car-detail-message">You have not selected any car</span>
+    <app-car-detail *ngIf="selectedCarId" [id]="selectedCarId"></app-car-detail>
+    <app-new-car *ngIf="creatingNewCar"></app-new-car>
+  </div>
+</div>

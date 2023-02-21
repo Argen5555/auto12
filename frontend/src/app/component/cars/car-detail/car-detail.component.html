@@ -1,0 +1,42 @@
+<span class="title-text">Car {{id}}</span>
+<div *ngIf="car">
+  <ul class="fields-list">
+    <li>
+      <div class="field-name">Id</div>
+      <div class="field-value">{{car.id}}</div>
+    </li>
+    <li>
+      <div class="field-name">Brand</div>
+      <div class="field-value">
+        <input type="text" class="text-input medium-input" [(ngModel)]="car.brand" (ngModelChange)="carChanged()">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Model</div>
+      <div class="field-value">
+        <input type="text" class="text-input medium-input" [(ngModel)]="car.model" (ngModelChange)="carChanged()">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Year</div>
+      <div class="field-value">
+        <input type="text" class="text-input small-input" [(ngModel)]="car.year" (ngModelChange)="carChanged()">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Number</div>
+      <div class="field-value">
+        <input type="text" class="text-input medium-input" [(ngModel)]="car.number" (ngModelChange)="carChanged()">
+      </div>
+    </li>
+    <li>
+      <div class="field-name">Owner id</div>
+      <div class="field-value">
+        <input type="text" class="text-input small-input" [(ngModel)]="car.ownerId" (ngModelChange)="carChanged()">
+      </div>
+    </li>
+  </ul>
+</div>
+<div *ngIf="car" class="button-list">
+  <button *ngIf="isCarChanged" (click)="updateCar()">Update car</button>
+</div>
