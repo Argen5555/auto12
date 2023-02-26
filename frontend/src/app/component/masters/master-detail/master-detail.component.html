@@ -1,31 +1,29 @@
-<span class="title-text">Master {{id}}</span>
-<div *ngIf="master">
-  <ul class="fields-list">
-    <li>
-      <div class="field-name">Name</div>
-      <div class="field-value">
-        <input type="text" class="text-input big-input" [(ngModel)]="master.name" (ngModelChange)="masterChanged()">
-      </div>
-    </li>
-    <li>
-      <div class="field-name">Completed order ids</div>
-      <div class="field-value">{{master.completedOrderIds}}</div>
-    </li>
-    <li>
-      <div class="field-name">Salary</div>
-      <div class="field-value" *ngIf="salary">{{salary | currency:'₴'}}</div>
-      <div class="field-value" *ngIf="!salary"> - </div>
-    </li>
-    <li *ngIf="orders">
-      <div class="field-name">Completed orders</div>
-      <div class="field-value">
-        <ul class="master-orders-list">
-          <li *ngFor="let order of orders">{{order.id}} - {{order.description}}</li>
-        </ul>
-      </div>
-    </li>
-  </ul>
-</div>
+<span class="detail-title-text">Master {{id}}</span>
+<ul *ngIf="master" class="field-list">
+  <li>
+    <div class="field-name">Name</div>
+    <div class="field-value">
+      <input type="text" class="text-input big-input" [(ngModel)]="master.name" (ngModelChange)="masterChanged()">
+    </div>
+  </li>
+  <li>
+    <div class="field-name">Completed order ids</div>
+    <div class="field-value">{{master.completedOrderIds}}</div>
+  </li>
+  <li>
+    <div class="field-name">Salary</div>
+    <div class="field-value" *ngIf="salary">{{salary | currency:'₴'}}</div>
+    <div class="field-value" *ngIf="!salary"> - </div>
+  </li>
+  <li *ngIf="orders">
+    <div class="field-name">Completed orders</div>
+    <div class="field-value">
+      <ul class="order-list scrollbar" >
+        <li *ngFor="let order of orders">{{order.id}} - {{order.description}}</li>
+      </ul>
+    </div>
+  </li>
+</ul>
 <div *ngIf="master" class="button-list">
   <button (click)="calculateSalary()">Calculate salary</button>
   <button (click)="getOrders()">Get orders</button>

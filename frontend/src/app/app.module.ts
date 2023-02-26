@@ -21,6 +21,7 @@ import { NewGoodComponent } from './component/goods/new-good/new-good.component'
 import { ServicesComponent } from './component/services/services.component';
 import { NewServiceComponent } from './component/services/new-service/new-service.component';
 import { ServiceDetailComponent } from './component/services/service-detail/service-detail.component';
+import { HeadNavigationComponent } from './component/head-navigation/head-navigation.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ServiceDetailComponent } from './component/services/service-detail/serv
     NewGoodComponent,
     ServicesComponent,
     NewServiceComponent,
-    ServiceDetailComponent
+    ServiceDetailComponent,
+    HeadNavigationComponent
   ],
   imports: [
     BrowserModule,

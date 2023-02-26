@@ -31,7 +31,7 @@ export class MastersComponent implements OnInit {
     this.creatingNewMaster = false;
   }
 
-  toCreatingMode(): void {
+  toCreatingMode = (): void => {
     this.creatingNewMaster = true;
     this.selectedMasterId = undefined;
   }

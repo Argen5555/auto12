@@ -31,7 +31,7 @@ export class GoodsComponent implements OnInit {
     this.creatingNewGood = false;
   }
 
-  toCreatingMode(): void {
+  toCreatingMode = (): void => {
     this.selectedGoodId = undefined;
     this.creatingNewGood = true;
   }

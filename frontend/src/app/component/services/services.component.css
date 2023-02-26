@@ -1,73 +1,18 @@
-.services-list {
-  margin: 0 auto;
-  padding: 0 10%;
-}
-
-.services-list li {
-  border-radius: 3px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 29px;
-}
-.services-list a {
-  text-decoration: none;
-  color: #6F6F6F;
-}
-.services-list .table-header {
-  padding: 0 30px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #999999;
-}
-.services-list .table-item {
-  cursor: pointer;
-  padding: 12px 20px;
-  background: #F5F5F5;
-  border-radius: 16px;
-  border: solid 2px;
-}
-.services-list .col-1 {
+.col-1 {
   flex-basis: 10%;
 }
-.services-list .col-2 {
+.col-2 {
   flex-basis: 20%;
 }
-.services-list .col-3 {
+.col-3 {
   flex-basis: 15%;
 }
-.services-list .col-4 {
+.col-4 {
   flex-basis: 15%;
 }
-.services-list .col-5 {
+.col-5 {
   flex-basis: 20%;
 }
-.services-list .col-6 {
+.col-6 {
   flex-basis: 20%;
-}
-
-.services-block {
-  float: left;
-  width: 50%;
-  height: 80vh;
-  overflow: auto;
-}
-.service-detail-block {
-  float: right;
-  width: 50%;
-}
-.service-detail-message {
-  display: table;
-  margin: 10% 45% 0 30%;
-  text-align: center;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 29px;
 }

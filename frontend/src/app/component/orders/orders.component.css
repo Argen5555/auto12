@@ -1,75 +1,12 @@
-.orders-list {
-  margin: 0 auto;
-  padding: 0 10%;
-}
-
-.orders-list li {
-  list-style-type: none;
-  border-radius: 3px;
-  margin-bottom: 16px;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 29px;
-}
-.orders-list .table-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 30px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #999999;
-}
-.orders-list .table-item {
-  cursor: pointer;
-  padding: 12px 20px;
-  background: #F5F5F5;
-  border-radius: 16px;
-  border: solid 2px;
-}
-.orders-list .first-row {
-  display: flex;
-  justify-content: space-between;
-}
-.orders-list .second-row {
-  margin-top: 5px;
-  font-size: 18px;
-}
-.orders-list .col-1 {
+.col-1 {
   flex-basis: 10%;
 }
-.orders-list .col-2 {
-  flex-basis: 70%;
-  text-align: end;
-  font-size: 18px;
+.col-2 {
+  flex-basis: 45%;
 }
-.orders-list .col-3 {
-  flex-basis: 20%;
-  text-align: end;
+.col-3 {
+  flex-basis: 30%;
 }
-.orders-list .header {
-  font-size: 14px;
-}
-
-.orders-block {
-  float: left;
-  width: 50%;
-  height: 80vh;
-  overflow: auto;
-}
-.order-detail-block {
-  float: right;
-  width: 50%;
-}
-.order-detail-message {
-  display: table;
-  margin: 10% 45% 0 30%;
-  text-align: center;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 29px;
+.col-4 {
+  flex-basis: 15%;
 }

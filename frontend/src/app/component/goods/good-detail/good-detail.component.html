@@ -1,20 +1,18 @@
-<span class="title-text">Good {{id}}</span>
-<div *ngIf="good">
-  <ul class="fields-list">
-    <li>
-      <div class="field-name">Name</div>
-      <div class="field-value">
-        <input type="text" class="text-input big-input" [(ngModel)]="good.name" (ngModelChange)="goodChanged()">
-      </div>
-    </li>
-    <li>
-      <div class="field-name">Price</div>
-      <div class="field-value">
-        <input type="text" class="text-input medium-input" [(ngModel)]="good.price" (ngModelChange)="goodChanged()">
-      </div>
-    </li>
-  </ul>
-</div>
+<span class="detail-title-text">Good {{id}}</span>
+<ul *ngIf="good" class="field-list">
+  <li>
+    <div class="field-name">Name</div>
+    <div class="field-value">
+      <input type="text" class="text-input big-input" [(ngModel)]="good.name" (ngModelChange)="goodChanged()">
+    </div>
+  </li>
+  <li>
+    <div class="field-name">Price</div>
+    <div class="field-value">
+      <input type="text" class="text-input medium-input" [(ngModel)]="good.price" (ngModelChange)="goodChanged()">
+    </div>
+  </li>
+</ul>
 <div *ngIf="good" class="button-list">
   <button *ngIf="isGoodChanged" (click)="updateGood()">Update good</button>
 </div>

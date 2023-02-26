@@ -1,0 +1,40 @@
+ .back-bt {
+  float: left;
+  margin: 33px 20px 33px 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #6F6F6F;
+}
+ .add-bt {
+  float: right;
+  margin: 30px 0;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 700;
+  color: #4A8888;
+}
+ .title-text {
+  float: left;
+  margin: 30px 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  text-transform: uppercase;
+  color: #6F6F6F;
+}
+
+@media (max-width: 1024px) {
+  .back-bt {
+    margin: 10px 6px 10px 0;
+    font-size: 26px;
+  }
+  .add-bt {
+    margin: 7px 0;
+    font-size: 32px;
+  }
+  .title-text {
+    margin: 7px 0;
+    font-size: 24px;
+    line-height: 32px;
+  }
+}

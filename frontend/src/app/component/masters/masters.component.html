@@ -1,28 +1,24 @@
-<div class="title-navigation">
-  <a href="/">
-    <img class="back-bt" src="./../../assets/images/back.svg">
-  </a>
-  <span class="title-text">Masters</span>
-  <img (click)="toCreatingMode()" class="add-bt" src="./../../assets/images/add.svg">
-</div>
-<div>
-  <div class="masters-block">
-    <ul class="masters-list">
-      <li class="table-header">
+<div class="wrapper">
+  <div class="navigation-block">
+    <app-head-navigation [titleText]="'Masters'" [toCreatingMode]="toCreatingMode"></app-head-navigation>
+  </div>
+  <div class="model-list-block scrollbar">
+    <ul class="model-list">
+      <li class="list-header">
         <div class="col-1">Id</div>
         <div class="col-2">Name</div>
         <div class="col-3">Completed orders</div>
       </li>
-      <li *ngFor="let master of masters" class="table-item" (click)="selectMaster(master.id)"
-      [ngStyle]="{'border-color': master.id == selectedMasterId ? '#999' : '#FFF'}">
+      <li *ngFor="let master of masters" class="list-item" (click)="selectMaster(master.id)"
+      [ngStyle]="{'border-color': master.id == selectedMasterId ? '#999' : 'transparent'}">
         <div class="col-1">{{master.id}}</div>
         <div class="col-2">{{master.name}}</div>
         <div class="col-3">{{master.completedOrderIds.length}}</div>
       </li>
     </ul>
   </div>
-  <div class="master-detail-block">
-    <span *ngIf="!selectedMasterId && !creatingNewMaster" class="master-detail-message">You have not selected any master</span>
+  <div class="model-detail-block scrollbar">
+    <span *ngIf="!selectedMasterId && !creatingNewMaster" class="model-detail-message">You have not selected any master</span>
     <app-master-detail *ngIf="selectedMasterId" [masterId]="selectedMasterId"></app-master-detail>
     <app-new-master *ngIf="creatingNewMaster"></app-new-master>
   </div>

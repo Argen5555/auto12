@@ -33,7 +33,7 @@ export class ServicesComponent implements OnInit {
     this.creatingNewService = false;
   }
 
-  toCreatingMode(): void {
+  toCreatingMode = (): void => {
     this.creatingNewService = true;
     this.selectedServiceId = undefined;
   }

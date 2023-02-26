@@ -1,28 +1,24 @@
-<div class="title-navigation">
-  <a href="/">
-    <img class="back-bt" src="./../../assets/images/back.svg">
-  </a>
-  <span class="title-text">Goods</span>
-  <img (click)="toCreatingMode()" class="add-bt" src="./../../assets/images/add.svg">
-</div>
-<div>
-  <div class="goods-block">
-    <ul class="goods-list">
-      <li class="table-header">
+<div class="wrapper">
+  <div class="navigation-block">
+    <app-head-navigation [titleText]="'Goods'" [toCreatingMode]="toCreatingMode"></app-head-navigation>
+  </div>
+  <div class="model-list-block scrollbar">
+    <ul class="model-list">
+      <li class="list-header">
         <div class="col-1">Id</div>
         <div class="col-2">Name</div>
         <div class="col-3">Price</div>
       </li>
-      <li *ngFor="let good of goods" class="table-item" (click)="selectGood(good.id)"
-      [ngStyle]="{'border-color': good.id == selectedGoodId ? '#999' : '#FFF'}">
+      <li *ngFor="let good of goods" class="list-item" (click)="selectGood(good.id)"
+      [ngStyle]="{'border-color': good.id == selectedGoodId ? '#999' : 'transparent'}">
         <div class="col-1">{{good.id}}</div>
         <div class="col-2">{{good.name}}</div>
         <div class="col-3">{{good.price}}</div>
       </li>
     </ul>
   </div>
-  <div class="good-detail-block">
-    <span *ngIf="!selectedGoodId && !creatingNewGood" class="good-detail-message">You have not selected any car</span>
+  <div class="model-detail-block scrollbar">
+    <span *ngIf="!selectedGoodId && !creatingNewGood" class="model-detail-message">You have not selected any car</span>
     <app-good-detail *ngIf="selectedGoodId" [goodId]="selectedGoodId"></app-good-detail>
     <app-new-good *ngIf="creatingNewGood"></app-new-good>
   </div>

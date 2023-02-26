@@ -31,7 +31,7 @@ export class CarsComponent implements OnInit {
     this.creatingNewCar = false;
   }
 
-  toCreatingMode(): void {
+  toCreatingMode = (): void => {
     this.selectedCarId = undefined;
     this.creatingNewCar = true;
   }

@@ -1,52 +1,50 @@
-<span class="title-text">Order {{id}}</span>
-<div *ngIf="order">
-  <ul class="fields-list">
-    <li>
-      <div class="field-name">Car id</div>
-      <div class="field-value">
-        <input type="text" class="text-input small-input" [(ngModel)]="order.carId" (ngModelChange)="orderChanged()">
-      </div>
-    </li>
-    <li>
-      <div class="field-name">Description</div>
-      <div class="field-value">
-        <input type="text" class="text-input big-input" [(ngModel)]="order.description" (ngModelChange)="orderChanged()">
-      </div>
-    </li>
-    <li>
-      <div class="field-name">Order time</div>
-      <div class="field-value">{{order.orderTime | date:'short'}}</div>
-    </li>
-    <li>
-      <div class="field-name">Completion time</div>
-      <div class="field-value" *ngIf="order.completionTime">{{order.completionTime | date:'short'}}</div>
-      <div class="field-value" *ngIf="!order.completionTime"> - </div>
-    </li>
-    <li>
-      <div class="field-name">Service ids</div>
-      <div class="field-value">{{order.serviceIds}}</div>
-    </li>
-    <li>
-      <div class="field-name">Goods ids</div>
-      <div class="field-value">
-        <input type="text" class="text-input medium-input" [(ngModel)]="order.goodsIds" (ngModelChange)="orderChanged()">
-      </div>
-    </li>
-    <li>
-      <div class="field-name">Status</div>
-      <div class="field-value">
-        <select class="select-input" [(ngModel)]="order.status" (ngModelChange)="statusChanged()">
-          <option *ngFor="let status of statusKeys; let i = index" value="{{status}}">{{(statusValues[i])}}</option>
-        </select>
-      </div>
-    </li>
-    <li>
-      <div class="field-name">Price</div>
-      <div class="field-value" *ngIf="order.price">{{order.price | currency:'₴'}}</div>
-      <div class="field-value" *ngIf="!order.price"> - </div>
-    </li>
-  </ul>
-</div>
+<span class="detail-title-text">Order {{id}}</span>
+<ul *ngIf="order" class="field-list">
+  <li>
+    <div class="field-name">Car id</div>
+    <div class="field-value">
+      <input type="text" class="text-input small-input" [(ngModel)]="order.carId" (ngModelChange)="orderChanged()">
+    </div>
+  </li>
+  <li>
+    <div class="field-name">Description</div>
+    <div class="field-value">
+      <input type="text" class="text-input big-input" [(ngModel)]="order.description" (ngModelChange)="orderChanged()">
+    </div>
+  </li>
+  <li>
+    <div class="field-name">Order time</div>
+    <div class="field-value">{{order.orderTime | date:'short'}}</div>
+  </li>
+  <li>
+    <div class="field-name">Completion time</div>
+    <div class="field-value" *ngIf="order.completionTime">{{order.completionTime | date:'short'}}</div>
+    <div class="field-value" *ngIf="!order.completionTime"> - </div>
+  </li>
+  <li>
+    <div class="field-name">Service ids</div>
+    <div class="field-value">{{order.serviceIds}}</div>
+  </li>
+  <li>
+    <div class="field-name">Goods ids</div>
+    <div class="field-value">
+      <input type="text" class="text-input medium-input" [(ngModel)]="order.goodsIds" (ngModelChange)="orderChanged()">
+    </div>
+  </li>
+  <li>
+    <div class="field-name">Status</div>
+    <div class="field-value">
+      <select class="select-input" [(ngModel)]="order.status" (ngModelChange)="statusChanged()">
+        <option *ngFor="let status of statusKeys; let i = index" value="{{status}}">{{(statusValues[i])}}</option>
+      </select>
+    </div>
+  </li>
+  <li>
+    <div class="field-name">Price</div>
+    <div class="field-value" *ngIf="order.price">{{order.price | currency:'₴'}}</div>
+    <div class="field-value" *ngIf="!order.price"> - </div>
+  </li>
+</ul>
 <div *ngIf="order" class="button-list">
   <button (click)="calculatePrice()">Calculate price</button>
   <button *ngIf="isStatusChanged" (click)="updateStatus()">Update status only</button>

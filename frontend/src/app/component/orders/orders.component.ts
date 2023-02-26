@@ -33,7 +33,7 @@ export class OrdersComponent implements OnInit {
     this.creatingNewOrder = false;
   }
 
-  toCreatingMode(): void {
+  toCreatingMode = (): void => {
     this.creatingNewOrder = true;
     this.selectedOrderId = undefined;
   }
