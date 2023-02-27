@@ -1,0 +1,19 @@
+<span class="detail-title-text">Owner {{id}}</span>
+<form #ownerUpdating="ngForm">
+  <ul *ngIf="owner" class="field-list">
+    <li>
+      <label class="field-name">Car ids</label>
+      <input type="text" name="carIds" pattern="^\d+(,\s*\d+)*$" class="text-input medium-input" [(ngModel)]="owner.carIds" (ngModelChange)="ownerChanged()"ngModel>
+    </li>
+    <li *ngIf="orders">
+      <label class="field-name">Orders</label>
+      <ul class="order-list scrollbar" >
+        <li *ngFor="let order of orders">{{order.id}} - {{order.description}}</li>
+      </ul>
+    </li>
+  </ul>
+</form>
+<div *ngIf="owner" class="button-list">
+  <button (click)="getOrders()">Get orders</button>
+  <button (click)="updateOwner()" [disabled]="ownerUpdating.invalid || !isOwnerChanged">Update owner</button>
+</div>

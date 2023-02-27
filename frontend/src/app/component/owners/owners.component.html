@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <div class="navigation-block">
+    <app-head-navigation [titleText]="'Owners'" [toCreatingMode]="toCreatingMode"></app-head-navigation>
+  </div>
+  <div class="model-list-block scrollbar">
+    <ul class="model-list">
+      <li class="list-header">
+        <div class="col-1">Id</div>
+        <div class="col-2">Cars</div>
+        <div class="col-3">Orders</div>
+      </li>
+      <li *ngFor="let owner of owners" class="list-item" (click)="selectOwner(owner.id)"
+      [ngStyle]="{'border-color': owner.id == selectedOwnerId ? '#999' : 'transparent'}">
+        <div class="col-1">{{owner.id}}</div>
+        <div class="col-2">{{owner.carIds.length}}</div>
+        <div class="col-3">{{owner.orderIds.length}}</div>
+      </li>
+    </ul>
+  </div>
+  <div class="model-detail-block scrollbar">
+    <span *ngIf="!selectedOwnerId && !creatingNewOwner" class="model-detail-message">You have not selected any owner</span>
+    <app-owner-detail *ngIf="selectedOwnerId" [ownerId]="selectedOwnerId"></app-owner-detail>
+    <app-new-owner *ngIf="creatingNewOwner"></app-new-owner>
+  </div>
+</div>

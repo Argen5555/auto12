@@ -22,6 +22,9 @@ import { ServicesComponent } from './component/services/services.component';
 import { NewServiceComponent } from './component/services/new-service/new-service.component';
 import { ServiceDetailComponent } from './component/services/service-detail/service-detail.component';
 import { HeadNavigationComponent } from './component/head-navigation/head-navigation.component';
+import { OwnersComponent } from './component/owners/owners.component';
+import { NewOwnerComponent } from './component/owners/new-owner/new-owner.component';
+import { OwnerDetailComponent } from './component/owners/owner-detail/owner-detail.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { HeadNavigationComponent } from './component/head-navigation/head-naviga
     ServicesComponent,
     NewServiceComponent,
     ServiceDetailComponent,
-    HeadNavigationComponent
+    HeadNavigationComponent,
+    OwnersComponent,
+    NewOwnerComponent,
+    OwnerDetailComponent
   ],
   imports: [
     BrowserModule,

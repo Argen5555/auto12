@@ -67,7 +67,7 @@ public class OwnerController {
         return responseDtoMapper.mapToDto(ownerService.update(owner));
     }
 
-    @PostMapping("/{id}/orders")
+    @GetMapping("/{id}/orders")
     @ApiOperation("Get all orders by owner id")
     public List<OrderResponseDto> getOrders(@PathVariable Long id) {
         return ownerService.getOrders(id)

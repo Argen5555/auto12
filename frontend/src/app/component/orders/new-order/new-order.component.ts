@@ -14,7 +14,8 @@ export class NewOrderComponent {
   constructor(private orderService: OrderService) {}
 
   saveOrder(data: any): void {
-    data.goodsIds = [...new Set(data.goodsIds.split(/[, ]+/))];
+    data.goodsIds = data.goodsIds == ''
+      ? [] : [...new Set(data.goodsIds.split(/[, ]+/))];
     this.orderService.saveOrder(data)
       .subscribe(_ => window.location.reload());
   }
