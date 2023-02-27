@@ -19,6 +19,12 @@ export class MasterDetailComponent implements OnChanges {
   constructor(
     private mastersComponent: MastersComponent,
     private masterService: MasterService) {}
+    
+  @Input() set masterId(value: number) {
+    this.id = value;
+    this.isMasterChanged = false;
+    this.orders = undefined;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.id != null) {
@@ -26,40 +32,34 @@ export class MasterDetailComponent implements OnChanges {
     }
   }
 
-  @Input() set masterId(value: number) {
-    this.id = value;
-    this.isMasterChanged = false;
-    this.orders = undefined;
-  }
-
   getMaster(): void {
     this.masterService.getMaster(this.id)
       .subscribe(master => this.master = master);
   }
   
-  masterChanged(): void {
-    this.isMasterChanged = true;
-  }
-
-  calculateSalary(): void {
-    this.masterService.calculateSalary(this.id)
-      .subscribe(salary => this.salary = salary);
-  }
-
   updateMaster(): void {
     const body = {
       name: this.master.name
     }
     this.masterService.updateMaster(this.id, body)
-      .subscribe(master => {
-        this.master = master;
-        this.mastersComponent.updateMasterInList(master);
-      });
+    .subscribe(master => {
+      this.master = master;
+      this.mastersComponent.updateMasterInList(master);
+    });
     this.isMasterChanged = false;
   }
-
+  
+    calculateSalary(): void {
+      this.masterService.calculateSalary(this.id)
+        .subscribe(salary => this.salary = salary);
+    }
+  
   getOrders(): void {
     this.masterService.getOrders(this.id)
       .subscribe(orders => this.orders = orders);
+  }
+  
+  masterChanged(): void {
+    this.isMasterChanged = true;
   }
 }

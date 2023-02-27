@@ -16,6 +16,11 @@ export class CarDetailComponent implements OnChanges {
   constructor(
     private carsComponent: CarsComponent,
     private carService: CarService) {}
+    
+  @Input() set carId(value: number) {
+    this.id = value;
+    this.isCarChanged = false;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.id != null) {
@@ -23,20 +28,11 @@ export class CarDetailComponent implements OnChanges {
     }
   }
 
-  @Input() set carId(value: number) {
-    this.id = value;
-    this.isCarChanged = false;
-  }
-
   getCar(): void {
     this.carService.getCar(this.id)
       .subscribe(car => this.car = car);
   }
   
-  carChanged(): void {
-    this.isCarChanged = true;
-  }
-
   updateCar(): void {
     const body = {
       brand: this.car.brand,
@@ -46,10 +42,14 @@ export class CarDetailComponent implements OnChanges {
       ownerId: this.car.ownerId
     }
     this.carService.updateCar(this.id, body)
-      .subscribe(car => {
-        this.car = car;
-        this.carsComponent.updateCarInList(car);
-      });
+    .subscribe(car => {
+      this.car = car;
+      this.carsComponent.updateCarInList(car);
+    });
     this.isCarChanged = false;
+  }
+  
+  carChanged(): void {
+    this.isCarChanged = true;
   }
 }

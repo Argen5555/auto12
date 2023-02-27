@@ -7,17 +7,10 @@ import { GoodService } from 'src/app/service/good.service';
   styleUrls: ['./new-good.component.css']
 })
 export class NewGoodComponent {
-  name!: string;
-  price!: number;
-
   constructor(private goodService: GoodService) {}
 
-  saveGood(): void {
-    const body = {
-      name: this.name,
-      price: this.price
-    }
-    this.goodService.saveGood(body)
-      .subscribe(good => window.location.reload());
+  saveGood(data: any): void {
+    this.goodService.saveGood(data)
+      .subscribe(_ => window.location.reload());
   }
 }

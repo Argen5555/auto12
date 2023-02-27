@@ -1,32 +1,26 @@
 <span class="detail-title-text">New Order</span>
-<ul class="field-list">
-  <li>
-    <div class="field-name">Car id</div>
-    <div class="field-value">
-      <input type="text" class="text-input small-input" [(ngModel)]="carId">
-    </div>
-  </li>
-  <li>
-    <div class="field-name">Description</div>
-    <div class="field-value">
-      <input type="text" class="text-input big-input" [(ngModel)]="description">
-    </div>
-  </li>
-  <li>
-    <div class="field-name">Goods ids</div>
-    <div class="field-value">
-      <input type="text" class="text-input medium-input" [(ngModel)]="goodsIds">
-    </div>
-  </li>
-  <li>
-    <div class="field-name">Status</div>
-    <div class="field-value">
-      <select class="select-input" [(ngModel)]="orderStatus">
+<form #orderCreating="ngForm">
+  <ul class="field-list">
+    <li>
+      <label class="field-name">Car id</label>
+      <input type="text" name="carId" pattern="^\d+$" class="text-input small-input" required ngModel>
+    </li>
+    <li>
+      <label class="field-name">Description</label>
+      <input type="text" name="description" class="text-input big-input" ngModel>
+    </li>
+    <li>
+      <label class="field-name">Goods ids</label>
+      <input type="text" name="goodsIds" pattern="^\d+(,\s*\d+)*$" placeholder="1,2,3" class="text-input medium-input" ngModel>
+    </li>
+    <li>
+      <label class="field-name">Status</label>
+      <select name="status" class="select-input" required ngModel>
         <option *ngFor="let status of statusKeys; let i = index" value="{{status}}">{{(statusValues[i])}}</option>
       </select>
-    </div>
-  </li>
-</ul>
+    </li>
+  </ul>
+</form>
 <div class="button-list">
-  <button (click)="saveOrder()">Save new order</button>
+  <button (click)="saveOrder(orderCreating.value)" [disabled]="orderCreating.invalid">Save new order</button>
 </div>

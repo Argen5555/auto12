@@ -1,12 +1,12 @@
 <span class="detail-title-text">New Master</span>
-<ul class="field-list">
-  <li>
-    <div class="field-name">Name</div>
-    <div class="field-value">
-      <input type="text" class="text-input medium-input" [(ngModel)]="masterName">
-    </div>
-  </li>
-</ul>
+<form #masterCreating="ngForm">
+  <ul class="field-list">
+    <li>
+      <label class="field-name">Name</label>
+      <input type="text" name="name" class="text-input medium-input" required ngModel>
+    </li>
+  </ul>
+</form>
 <div class="button-list">
-  <button (click)="saveMaster()">Save new master</button>
+  <button (click)="saveMaster(masterCreating.value)" [disabled]="masterCreating.invalid">Save new master</button>
 </div>

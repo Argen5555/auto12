@@ -44,6 +44,9 @@ body {
   border: none;
   border-bottom: 0.12rem solid #999;
 }
+.text-input:invalid {
+  border-color: red;
+}
 
 /*---Select input style---*/
 .select-input {
@@ -55,6 +58,9 @@ body {
   border: none;
   border-bottom: 0.12rem solid #999;
   transition: all 150ms ease;
+}
+.select-input:invalid {
+  border-color: red;
 }
 
 /*---Input size---*/
@@ -77,13 +83,13 @@ body {
 .button-list button {
   margin: 6px;
   padding: 6px 10px;
-  cursor: pointer;
   border: #6F6F6F solid 0px;
   border-radius: 5px;
   background-color: #F5F5F5;
 }
-.button-list button:hover {
+.button-list button:hover:enabled {
   margin: 5px;
+  cursor: pointer;
   border-width: 1px;
 }
 
@@ -123,7 +129,7 @@ body {
   padding: 0 20px;
   font-size: 12px;
   text-transform: uppercase;
-  color: #999;
+  color: #4A8888;
 }
 .model-list .list-item {
   padding: 16px 20px;
@@ -162,13 +168,8 @@ body {
 }
 .field-list .field-name {
   float: left;
-  flex-basis: 50%;
   margin-right: 20px;
   color: #999;
-}
-.field-list .field-value {
-  float: left;
-  flex-basis: 50%;
 }
 
 @media (max-width: 1024px) {

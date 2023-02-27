@@ -8,25 +8,16 @@ import { ServiceModelService } from 'src/app/service/service-model.service';
   styleUrls: ['./new-service.component.css']
 })
 export class NewServiceComponent {
-  diagnostic: boolean = false;
-  orderId!: number;
-  masterId!: number;
-  price!: number;
-  serviceStatus = 'UNPAID';
   statusKeys = Object.keys(ServiceStatus);
   statusValues = Object.values(ServiceStatus);
 
   constructor(private serviceModelService: ServiceModelService) {}
 
-  saveService(): void {
-    const body = {
-      diagnostic: this.diagnostic,
-      orderId: this.orderId,
-      masterId: this.masterId,
-      price: this.price,
-      status: this.serviceStatus
+  saveService(data: any): void {
+    if (data.diagnostic == '') {
+      data.diagnostic = false;
     }
-    this.serviceModelService.saveService(body)
-      .subscribe(service => window.location.reload());
+    this.serviceModelService.saveService(data)
+      .subscribe(_ => window.location.reload());
   }
 }

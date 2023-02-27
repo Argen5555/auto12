@@ -8,23 +8,14 @@ import { OrderService } from 'src/app/service/order.service';
   styleUrls: ['./new-order.component.css']
 })
 export class NewOrderComponent {
-  carId!: number;
-  description!: string;
-  goodsIds!: string;
-  orderStatus = 'ACCEPTED';
   statusKeys = Object.keys(OrderStatus);
   statusValues = Object.values(OrderStatus);
 
   constructor(private orderService: OrderService) {}
 
-  saveOrder(): void {
-    const body = {
-      carId: this.carId,
-      description: this.description,
-      goodsIds: this.goodsIds.split(','),
-      status: this.orderStatus
-    }
-    this.orderService.saveOrder(body)
-      .subscribe(order => window.location.reload());
+  saveOrder(data: any): void {
+    data.goodsIds = [...new Set(data.goodsIds.split(/[, ]+/))];
+    this.orderService.saveOrder(data)
+      .subscribe(_ => window.location.reload());
   }
 }

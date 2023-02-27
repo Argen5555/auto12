@@ -18,13 +18,7 @@ export class ServiceDetailComponent implements OnChanges {
 
   constructor(
     private servicesComponent: ServicesComponent,
-    private serviceModelService: ServiceModelService) {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.id != null) {
-      this.getService();
-    }
-  }
+    private serviceModelService: ServiceModelService) { }
 
   @Input() set serviceId(value: number) {
     this.id = value;
@@ -32,22 +26,15 @@ export class ServiceDetailComponent implements OnChanges {
     this.isStatusChanged = false;
   }
 
-  orderChanged(): void {
-    this.isServiceChanged = true;
-  }
-
-  statusChanged(): void {
-    this.isStatusChanged = true;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.id != null) {
+      this.getService();
+    }
   }
 
   getService(): void {
     this.serviceModelService.getService(this.id)
       .subscribe(service => this.service = service);
-  }
-
-  setService(service: Service): void {
-    this.service = service;
-    this.servicesComponent.updateServiceInList(service);
   }
 
   updateService(): void {
@@ -69,5 +56,18 @@ export class ServiceDetailComponent implements OnChanges {
       .subscribe(order => this.setService(order));
     this.isServiceChanged = false;
     this.isStatusChanged = false;
+  }
+
+  setService(service: Service): void {
+    this.service = service;
+    this.servicesComponent.updateServiceInList(service);
+  }
+
+  orderChanged(): void {
+    this.isServiceChanged = true;
+  }
+
+  statusChanged(): void {
+    this.isStatusChanged = true;
   }
 }

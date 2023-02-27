@@ -7,15 +7,10 @@ import { MasterService } from 'src/app/service/master.service';
   styleUrls: ['./new-master.component.css']
 })
 export class NewMasterComponent {
-  masterName!: string;
-
   constructor(private masterService: MasterService) {}
 
-  saveMaster(): void {
-    const body = {
-      name: this.masterName
-    }
-    this.masterService.saveMaster(body)
-      .subscribe(master => window.location.reload());
+  saveMaster(data: any): void {
+    this.masterService.saveMaster(data)
+      .subscribe(_ => window.location.reload());
   }
 }

@@ -13,7 +13,7 @@
       [ngStyle]="{'border-color': good.id == selectedGoodId ? '#999' : 'transparent'}">
         <div class="col-1">{{good.id}}</div>
         <div class="col-2">{{good.name}}</div>
-        <div class="col-3">{{good.price}}</div>
+        <div class="col-3">{{good.price | currency:'₴'}}</div>
       </li>
     </ul>
   </div>

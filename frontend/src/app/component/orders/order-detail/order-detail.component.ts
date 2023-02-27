@@ -18,13 +18,7 @@ export class OrderDetailComponent implements OnChanges {
 
   constructor(
     private ordersComponent: OrdersComponent,
-    private orderService: OrderService) {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.id != null) {
-      this.getOrder();
-    }
-  }
+    private orderService: OrderService) { }
 
   @Input() set orderId(value: number) {
     this.id = value;
@@ -32,12 +26,10 @@ export class OrderDetailComponent implements OnChanges {
     this.isStatusChanged = false;
   }
 
-  orderChanged(): void {
-    this.isOrderChanged = true;
-  }
-
-  statusChanged(): void {
-    this.isStatusChanged = true;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.id != null) {
+      this.getOrder();
+    }
   }
 
   getOrder(): void {
@@ -50,16 +42,12 @@ export class OrderDetailComponent implements OnChanges {
       .subscribe(price => this.order.price = price);
   }
 
-  setOrder(order: Order): void {
-    this.order = order;
-    this.ordersComponent.updateOrderInList(order);
-  }
-
   updateOrder(): void {
     const body = {
       carId: this.order.carId,
       description: this.order.description,
-      goodsIds: this.order.goodsIds.toString().split(','), 
+      goodsIds: this.order.goodsIds.toString() === '' 
+        ? [] : [...new Set(this.order.goodsIds.toString().split(/[, ]+/))],
       status: this.order.status
     }
     this.orderService.updateOrder(this.id, body)
@@ -73,5 +61,18 @@ export class OrderDetailComponent implements OnChanges {
       .subscribe(order => this.setOrder(order));
     this.isOrderChanged = false;
     this.isStatusChanged = false;
+  }
+
+  orderChanged(): void {
+    this.isOrderChanged = true;
+  }
+
+  statusChanged(): void {
+    this.isStatusChanged = true;
+  }
+
+  setOrder(order: Order): void {
+    this.order = order;
+    this.ordersComponent.updateOrderInList(order);
   }
 }

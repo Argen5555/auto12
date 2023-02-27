@@ -18,7 +18,7 @@
         <div class="col-2">{{service.diagnostic}}</div>
         <div class="col-3">{{service.orderId}}</div>
         <div class="col-4">{{service.masterId}}</div>
-        <div class="col-5">{{service.price}}</div>
+        <div class="col-5">{{service.price | currency:'₴'}}</div>
         <div class="col-6">{{(statusValues[statusKeys.indexOf(service.status)])}}</div>
       </li>
     </ul>

@@ -16,6 +16,11 @@ export class GoodDetailComponent implements OnChanges {
   constructor(
     private goodsComponent: GoodsComponent,
     private goodService: GoodService) {}
+    
+  @Input() set goodId(value: number) {
+    this.id = value;
+    this.isGoodChanged = false;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.id != null) {
@@ -23,20 +28,11 @@ export class GoodDetailComponent implements OnChanges {
     }
   }
 
-  @Input() set goodId(value: number) {
-    this.id = value;
-    this.isGoodChanged = false;
-  }
-
   getGood(): void {
     this.goodService.getGood(this.id)
       .subscribe(good => this.good = good);
   }
   
-  goodChanged(): void {
-    this.isGoodChanged = true;
-  }
-
   updateGood(): void {
     const body = {
       name: this.good.name,
@@ -48,5 +44,9 @@ export class GoodDetailComponent implements OnChanges {
         this.goodsComponent.updateGoodInList(good);
       });
     this.isGoodChanged = false;
+  }
+    
+  goodChanged(): void {
+    this.isGoodChanged = true;
   }
 }
