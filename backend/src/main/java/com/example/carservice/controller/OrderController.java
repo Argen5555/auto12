@@ -42,7 +42,7 @@ public class OrderController {
 
     @GetMapping
     @ApiOperation("Get all orders")
-    public List<OrderResponseDto> getALl() {
+    public List<OrderResponseDto> getAll() {
         return orderService.getAll()
                 .stream()
                 .map(responseDtoMapper::mapToDto)

@@ -37,7 +37,7 @@ export class OrderService {
     return this.http.post<Order>(url, body, this.httpOptions);
   }
 
-  updateStatus(id: number, status: OrderStatus): Observable<Order>  {
+  updateStatus(id: number, status: OrderStatus): Observable<Order> {
     const url = `${this.ordersUrl}/${id}/status`;
     const body = {
       name: status

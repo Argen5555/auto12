@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +25,7 @@ import { HeadNavigationComponent } from './component/head-navigation/head-naviga
 import { OwnersComponent } from './component/owners/owners.component';
 import { NewOwnerComponent } from './component/owners/new-owner/new-owner.component';
 import { OwnerDetailComponent } from './component/owners/owner-detail/owner-detail.component';
+import { HttpErrorInterceptor } from './service/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,13 @@ import { OwnerDetailComponent } from './component/owners/owner-detail/owner-deta
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpErrorInterceptor,
+    multi: true,
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
