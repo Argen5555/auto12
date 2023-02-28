@@ -3,6 +3,7 @@ package com.example.carservice.service.impl;
 import com.example.carservice.model.Order;
 import com.example.carservice.model.Owner;
 import com.example.carservice.repository.OwnerRepository;
+import com.example.carservice.service.CarService;
 import com.example.carservice.service.OwnerService;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class OwnerServiceImpl implements OwnerService {
     private final OwnerRepository ownerRepository;
+    private final CarService carService;
 
-    public OwnerServiceImpl(OwnerRepository ownerRepository) {
+    public OwnerServiceImpl(OwnerRepository ownerRepository, CarService carService) {
         this.ownerRepository = ownerRepository;
+        this.carService = carService;
     }
 
     @Override
@@ -32,6 +35,11 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public Owner update(Owner owner) {
+        Owner oldOwner = get(owner.getId());
+        oldOwner.getCars()
+                .stream()
+                .filter(car -> !owner.getCars().contains(car))
+                .forEach(carService::delete);
         return ownerRepository.save(owner);
     }
 

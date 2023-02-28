@@ -11,4 +11,6 @@ public interface CarService {
     Car add(Car car);
 
     Car update(Car car);
+
+    void delete(Car car);
 }
