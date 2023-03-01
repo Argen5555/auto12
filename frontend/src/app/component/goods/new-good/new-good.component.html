@@ -1,0 +1,16 @@
+<span class="detail-title-text">New Good</span>
+<form #goodCreating="ngForm">
+  <ul class="field-list">
+    <li>
+      <label class="field-name">Name</label>
+      <input type="text" name="name" class="text-input big-input" required ngModel>
+    </li>
+    <li>
+      <label class="field-name">Price</label>
+      <input type="text" name="price" pattern="^\d+(\.\d{1,2})?$" placeholder="1234.56" class="text-input medium-input" required ngModel>
+    </li>
+  </ul>
+</form>
+<div class="button-list">
+  <button (click)="saveGood(goodCreating.value)" [disabled]="goodCreating.invalid">Save new good</button>
+</div>

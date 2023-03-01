@@ -1,6 +1,6 @@
 package com.example.carservice.dto.response;
 
-import java.util.List;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,5 +9,5 @@ import lombok.Setter;
 public class MasterResponseDto {
     private Long id;
     private String name;
-    private List<Long> completeOrderIds;
+    private Set<Long> completedOrderIds;
 }

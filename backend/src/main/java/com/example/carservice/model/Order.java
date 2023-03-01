@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -32,12 +33,9 @@ public class Order {
     private String description;
     @Column(name = "order_time")
     private LocalDateTime orderTime;
-    @OneToMany
-    @JoinTable(name = "orders_services",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id"))
+    @OneToMany(mappedBy = "order")
     private List<ServiceModel> services;
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "orders_goods",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "goods_id"))

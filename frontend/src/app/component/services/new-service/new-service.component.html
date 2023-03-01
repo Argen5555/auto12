@@ -1,0 +1,30 @@
+<span class="detail-title-text">New Service</span>
+<form #serviceCreating="ngForm">
+  <ul class="field-list">
+    <li>
+      <label class="field-name">Diagnostic</label>
+      <input type="checkbox" name="diagnostic" class="checkbox-input" ngModel>
+    </li>
+    <li>
+      <label class="field-name">Order id</label>
+      <input type="text" name="orderId" pattern="^\d+$" class="text-input small-input" required ngModel>
+    </li>
+    <li>
+      <label class="field-name">Master id</label>
+      <input type="text" name="masterId" pattern="^\d+$" class="text-input small-input" required ngModel>
+    </li>
+    <li>
+      <label class="field-name">Price</label>
+      <input type="text" name="price" pattern="^\d+(\.\d{1,2})?$" placeholder="1234.56" class="text-input medium-input" required ngModel>
+    </li>
+    <li>
+      <label class="field-name">Status</label>
+      <select name="status" class="select-input" required ngModel>
+        <option *ngFor="let status of statusKeys; let i = index" value="{{status}}">{{(statusValues[i])}}</option>
+      </select>
+    </li>
+  </ul>
+</form>
+<div class="button-list">
+  <button (click)="saveService(serviceCreating.value)" [disabled]="serviceCreating.invalid">Save new service</button>
+</div>

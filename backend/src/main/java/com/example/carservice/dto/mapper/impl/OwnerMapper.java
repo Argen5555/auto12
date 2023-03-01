@@ -7,20 +7,19 @@ import com.example.carservice.dto.response.OwnerResponseDto;
 import com.example.carservice.model.Car;
 import com.example.carservice.model.Order;
 import com.example.carservice.model.Owner;
-import com.example.carservice.repository.CarRepository;
-import com.example.carservice.repository.OrderRepository;
+import com.example.carservice.service.CarService;
+import com.example.carservice.service.OrderService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OwnerMapper implements RequestDtoMapper<OwnerRequestDto, Owner>,
         ResponseDtoMapper<OwnerResponseDto, Owner> {
-    private final CarRepository carRepository;
-    private final OrderRepository orderRepository;
+    private final CarService carService;
+    private final OrderService orderService;
 
-    public OwnerMapper(CarRepository carRepository,
-                       OrderRepository orderRepository) {
-        this.carRepository = carRepository;
-        this.orderRepository = orderRepository;
+    public OwnerMapper(CarService carService, OrderService orderService) {
+        this.carService = carService;
+        this.orderService = orderService;
     }
 
     @Override
@@ -28,11 +27,11 @@ public class OwnerMapper implements RequestDtoMapper<OwnerRequestDto, Owner>,
         Owner owner = new Owner();
         owner.setCars(dto.getCarIds()
                 .stream()
-                .map(carRepository::getReferenceById)
+                .map(carService::get)
                 .toList());
         owner.setOrders(dto.getOrderIds()
                 .stream()
-                .map(orderRepository::getReferenceById)
+                .map(orderService::get)
                 .toList());
         return owner;
     }

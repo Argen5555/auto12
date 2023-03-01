@@ -7,23 +7,20 @@ import com.example.carservice.dto.response.OrderResponseDto;
 import com.example.carservice.model.Goods;
 import com.example.carservice.model.Order;
 import com.example.carservice.model.ServiceModel;
-import com.example.carservice.repository.GoodsRepository;
-import com.example.carservice.repository.ServiceRepository;
 import com.example.carservice.service.CarService;
+import com.example.carservice.service.GoodsService;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OrderMapper implements RequestDtoMapper<OrderRequestDto, Order>,
         ResponseDtoMapper<OrderResponseDto, Order> {
-    private final ServiceRepository serviceRepository;
-    private final GoodsRepository goodsRepository;
+    private final GoodsService goodsService;
     private final CarService carService;
 
-    public OrderMapper(ServiceRepository serviceRepository,
-                       GoodsRepository goodsRepository,
+    public OrderMapper(GoodsService goodsService,
                        CarService carService) {
-        this.serviceRepository = serviceRepository;
-        this.goodsRepository = goodsRepository;
+        this.goodsService = goodsService;
         this.carService = carService;
     }
 
@@ -32,13 +29,10 @@ public class OrderMapper implements RequestDtoMapper<OrderRequestDto, Order>,
         Order order = new Order();
         order.setCar(carService.get(dto.getCarId()));
         order.setDescription(dto.getDescription());
-        order.setServices(dto.getServiceIds()
-                .stream()
-                .map(serviceRepository::getReferenceById)
-                .toList());
+        order.setServices(List.of());
         order.setGoods(dto.getGoodsIds()
                 .stream()
-                .map(goodsRepository::getReferenceById)
+                .map(goodsService::get)
                 .toList());
         order.setStatus(dto.getStatus());
         return order;

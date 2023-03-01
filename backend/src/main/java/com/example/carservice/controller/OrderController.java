@@ -11,6 +11,7 @@ import com.example.carservice.model.Order;
 import com.example.carservice.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import java.math.BigDecimal;
+import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,22 @@ public class OrderController {
         this.statusRequestDtoMapper = statusRequestDtoMapper;
     }
 
+    @GetMapping
+    @ApiOperation("Get all orders")
+    public List<OrderResponseDto> getAll() {
+        return orderService.getAll()
+                .stream()
+                .map(responseDtoMapper::mapToDto)
+                .toList();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("Get order by id")
+    public OrderResponseDto get(@PathVariable Long id) {
+        Order order = orderService.get(id);
+        return responseDtoMapper.mapToDto(order);
+    }
+
     @PostMapping
     @ApiOperation("Add a new order")
     public OrderResponseDto create(@RequestBody OrderRequestDto requestDto) {
@@ -63,7 +80,7 @@ public class OrderController {
         return responseDtoMapper.mapToDto(orderService.addGoods(id, goods));
     }
 
-    @GetMapping("/{id}/status")
+    @PostMapping("/{id}/status")
     @ApiOperation("Update status by order id")
     public OrderResponseDto updateStatus(@PathVariable Long id,
                                          @RequestBody StatusRequestDto statusRequestDto) {

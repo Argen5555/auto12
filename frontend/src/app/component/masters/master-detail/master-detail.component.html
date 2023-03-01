@@ -1,0 +1,29 @@
+<span class="detail-title-text">Master {{id}}</span>
+<form #masterUpdating="ngForm">
+  <ul *ngIf="master" class="field-list">
+    <li>
+      <label class="field-name">Name</label>
+      <input type="text" name="name" class="text-input big-input" [(ngModel)]="master.name" (ngModelChange)="masterChanged()" required>
+    </li>
+    <li>
+      <label class="field-name">Completed order ids</label>
+      <label>{{master.completedOrderIds}}</label>
+    </li>
+    <li>
+      <label class="field-name">Salary</label>
+      <label *ngIf="salary">{{salary | currency:'₴'}}</label>
+      <label *ngIf="!salary"> - </label>
+    </li>
+    <li *ngIf="orders">
+      <label class="field-name">Completed orders</label>
+      <ul class="order-list scrollbar" >
+        <li *ngFor="let order of orders">{{order.id}} - {{order.description}}</li>
+      </ul>
+    </li>
+  </ul>
+</form>
+<div *ngIf="master" class="button-list">
+  <button (click)="calculateSalary()">Calculate salary</button>
+  <button (click)="getOrders()">Get orders</button>
+  <button (click)="updateMaster()" [disabled]="masterUpdating.invalid || !isMasterChanged">Update master</button>
+</div>

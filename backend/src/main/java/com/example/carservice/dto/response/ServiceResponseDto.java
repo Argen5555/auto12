@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class ServiceResponseDto {
     private Long id;
+    private Boolean diagnostic;
     private Long orderId;
     private Long masterId;
     private BigDecimal price;

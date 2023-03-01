@@ -10,6 +10,7 @@ import com.example.carservice.model.Owner;
 import com.example.carservice.service.OwnerService;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,10 +35,26 @@ public class OwnerController {
         this.orderResponseDtoMapper = orderResponseDtoMapper;
     }
 
+    @GetMapping
+    @ApiOperation("Get all owners")
+    public List<OwnerResponseDto> getAll() {
+        return ownerService.getAll()
+                .stream()
+                .map(responseDtoMapper::mapToDto)
+                .toList();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("Get owner by id")
+    public OwnerResponseDto get(@PathVariable Long id) {
+        Owner owner = ownerService.get(id);
+        return responseDtoMapper.mapToDto(owner);
+    }
+
     @PostMapping
     @ApiOperation("Add a new owner")
-    public OwnerResponseDto create(@RequestBody OwnerRequestDto requestDto) {
-        Owner owner = requestDtoMapper.mapToModel(requestDto);
+    public OwnerResponseDto create() {
+        Owner owner = newOwner();
         return responseDtoMapper.mapToDto(ownerService.add(owner));
     }
 
@@ -50,12 +67,19 @@ public class OwnerController {
         return responseDtoMapper.mapToDto(ownerService.update(owner));
     }
 
-    @PostMapping("/{id}/orders")
+    @GetMapping("/{id}/orders")
     @ApiOperation("Get all orders by owner id")
     public List<OrderResponseDto> getOrders(@PathVariable Long id) {
         return ownerService.getOrders(id)
                 .stream()
                 .map(orderResponseDtoMapper::mapToDto)
                 .toList();
+    }
+
+    private Owner newOwner() {
+        Owner owner = new Owner();
+        owner.setCars(List.of());
+        owner.setOrders(List.of());
+        return owner;
     }
 }

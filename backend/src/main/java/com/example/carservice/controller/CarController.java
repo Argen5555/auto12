@@ -7,6 +7,8 @@ import com.example.carservice.dto.response.CarResponseDto;
 import com.example.carservice.model.Car;
 import com.example.carservice.service.CarService;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +28,22 @@ public class CarController {
         this.carService = carService;
         this.requestDtoMapper = requestDtoMapper;
         this.responseDtoMapper = responseDtoMapper;
+    }
+
+    @GetMapping
+    @ApiOperation("Get all cars")
+    public List<CarResponseDto> getAll() {
+        return carService.getAll()
+                .stream()
+                .map(responseDtoMapper::mapToDto)
+                .toList();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("Get car by id")
+    public CarResponseDto get(@PathVariable Long id) {
+        Car car = carService.get(id);
+        return responseDtoMapper.mapToDto(car);
     }
 
     @PostMapping

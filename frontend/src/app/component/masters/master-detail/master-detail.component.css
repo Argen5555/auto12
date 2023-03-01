@@ -1,0 +1,13 @@
+.order-list {
+  min-width: 50px;
+  min-height: 20px;
+  max-width: 350px;
+  max-height: 200px;
+  padding: 0;
+  overflow: scroll;
+  border: #999 solid 1px;
+  border-radius: 5px;
+}
+.order-list li {
+  margin: 5px 10px;
+}

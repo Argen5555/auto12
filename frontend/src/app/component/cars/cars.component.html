@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class="navigation-block">
+    <app-head-navigation [titleText]="'Cars'" [toCreatingMode]="toCreatingMode"></app-head-navigation>
+  </div>
+  <div class="model-list-block scrollbar">
+    <ul class="model-list">
+      <li class="list-header">
+        <div class="col-1">Id</div>
+        <div class="col-2">Brand & Model</div>
+        <div class="col-3">Number</div>
+        <div class="col-4">Owner id</div>
+      </li>
+      <li *ngFor="let car of cars" class="list-item" (click)="selectCar(car.id)"
+      [ngStyle]="{'border-color': car.id == selectedCarId ? '#999' : 'transparent'}">
+        <div class="col-1">{{car.id}}</div>
+        <div class="col-2">{{car.brand}} {{car.model}}</div>
+        <div class="col-3">{{car.number}}</div>
+        <div class="col-4">{{car.ownerId}}</div>
+      </li>
+    </ul>
+  </div>
+  <div class="model-detail-block scrollbar">
+    <span *ngIf="!selectedCarId && !creatingNewCar" class="model-detail-message">You have not selected any car</span>
+    <app-car-detail *ngIf="selectedCarId" [carId]="selectedCarId"></app-car-detail>
+    <app-new-car *ngIf="creatingNewCar"></app-new-car>
+  </div>
+</div>

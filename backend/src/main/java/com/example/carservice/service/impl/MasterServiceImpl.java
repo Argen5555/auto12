@@ -8,6 +8,7 @@ import com.example.carservice.service.MasterService;
 import com.example.carservice.service.ServiceModelService;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,31 +24,47 @@ public class MasterServiceImpl implements MasterService {
     }
 
     @Override
+    public List<Master> getAll() {
+        return masterRepository.findAll();
+    }
+
+    @Override
+    public Master get(Long id) {
+        return masterRepository.getReferenceById(id);
+    }
+
+    @Override
     public Master add(Master master) {
         return masterRepository.save(master);
     }
 
     @Override
     public Master update(Master master) {
+        Master oldMaster = get(master.getId());
+        master.setCompletedOrders(oldMaster.getCompletedOrders());
         return masterRepository.save(master);
     }
 
     @Override
-    public List<Order> getOrders(Long id) {
+    public List<Master> update(Iterable<Master> masters) {
+        return masterRepository.saveAll(masters);
+    }
+
+    @Override
+    public Set<Order> getOrders(Long id) {
         return masterRepository.getReferenceById(id).getCompletedOrders();
     }
 
     @Override
     public BigDecimal calculateSalary(Long id) {
-        List<ServiceModel> services = serviceModelService
-                .getAllByMasterIdAndStatus(id, ServiceModel.ServiceStatus.UNPAID);
-        BigDecimal salary = services
+        return get(id).getCompletedOrders()
                 .stream()
+                .flatMap(order -> order.getServices().stream())
+                .filter(service -> service.getStatus().equals(ServiceModel.ServiceStatus.UNPAID))
+                .peek(service -> serviceModelService.updateStatus(
+                        service.getId(), ServiceModel.ServiceStatus.PAID))
                 .map(ServiceModel::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .multiply(new BigDecimal(SALARY_PERCENT));
-        services.forEach(service ->
-                serviceModelService.updateStatus(service.getId(), ServiceModel.ServiceStatus.PAID));
-        return salary;
     }
 }

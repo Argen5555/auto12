@@ -15,6 +15,16 @@ public class ServiceModelServiceImpl implements ServiceModelService {
     }
 
     @Override
+    public List<ServiceModel> getAll() {
+        return serviceRepository.findAll();
+    }
+
+    @Override
+    public ServiceModel get(Long id) {
+        return serviceRepository.getReferenceById(id);
+    }
+
+    @Override
     public ServiceModel add(ServiceModel service) {
         return serviceRepository.save(service);
     }
@@ -29,11 +39,5 @@ public class ServiceModelServiceImpl implements ServiceModelService {
         ServiceModel service = serviceRepository.getReferenceById(id);
         service.setStatus(status);
         return update(service);
-    }
-
-    @Override
-    public List<ServiceModel> getAllByMasterIdAndStatus(Long masterId,
-                                                        ServiceModel.ServiceStatus status) {
-        return serviceRepository.getAllByMasterIdAndStatus(masterId, status);
     }
 }

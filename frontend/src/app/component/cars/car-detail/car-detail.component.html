@@ -1,0 +1,28 @@
+<span class="detail-title-text">Car {{id}}</span>
+<form #carUpdating="ngForm">
+  <ul *ngIf="car" class="field-list">
+    <li>
+      <label class="field-name">Brand</label>
+      <input type="text" name="brand" class="text-input medium-input" [(ngModel)]="car.brand" (ngModelChange)="carChanged()">
+    </li>
+    <li>
+      <label class="field-name">Model</label>
+      <input type="text" name="model" class="text-input medium-input" [(ngModel)]="car.model" (ngModelChange)="carChanged()">
+    </li>
+    <li>
+      <label class="field-name">Year</label>
+      <input type="text" name="year" pattern="^\d+$" class="text-input small-input" [(ngModel)]="car.year" (ngModelChange)="carChanged()" required>
+    </li>
+    <li>
+      <label class="field-name">Number</label>
+      <input type="text" name="number" pattern="^[0-9a-zA-Z]*$" class="text-input medium-input" [(ngModel)]="car.number" (ngModelChange)="carChanged()" required>
+    </li>
+    <li>
+      <label class="field-name">Owner id</label>
+      <input type="text" name="ownerId" pattern="^\d+$" class="text-input small-input" [(ngModel)]="car.ownerId" (ngModelChange)="carChanged()" required>
+    </li>
+  </ul>
+</form>
+<div *ngIf="car" class="button-list">
+  <button (click)="updateCar()" [disabled]="carUpdating.invalid || !isCarChanged">Update car</button>
+</div>

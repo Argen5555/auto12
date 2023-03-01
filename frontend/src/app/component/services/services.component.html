@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <div class="navigation-block">
+    <app-head-navigation [titleText]="'Services'" [toCreatingMode]="toCreatingMode"></app-head-navigation>
+  </div>
+  <div class="model-list-block scrollbar">
+    <ul class="model-list">
+      <li class="list-header">
+        <div class="col-1 header">Id</div>
+        <div class="col-2 header">Diagnostic</div>
+        <div class="col-3 header">Order id</div>
+        <div class="col-4 header">Master id</div>
+        <div class="col-5 header">Price</div>
+        <div class="col-6 header">Status</div>
+      </li>
+      <li *ngFor="let service of services" class="list-item" (click)="selectService(service.id)"
+      [ngStyle]="{'border-color': service.id == selectedServiceId ? '#999' : 'transparent'}">
+        <div class="col-1">{{service.id}}</div>
+        <div class="col-2">{{service.diagnostic}}</div>
+        <div class="col-3">{{service.orderId}}</div>
+        <div class="col-4">{{service.masterId}}</div>
+        <div class="col-5">{{service.price | currency:'₴'}}</div>
+        <div class="col-6">{{(statusValues[statusKeys.indexOf(service.status)])}}</div>
+      </li>
+    </ul>
+  </div>
+  <div class="model-detail-block scrollbar">
+    <span *ngIf="!selectedServiceId && !creatingNewService" class="model-detail-message">You have not selected any service</span>
+    <app-service-detail *ngIf="selectedServiceId" [serviceId]="selectedServiceId"></app-service-detail>
+    <app-new-service *ngIf="creatingNewService"></app-new-service>
+  </div>
+</div>

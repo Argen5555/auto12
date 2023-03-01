@@ -1,29 +1,53 @@
 package com.example.carservice.service.impl;
 
 import com.example.carservice.model.Goods;
+import com.example.carservice.model.Master;
 import com.example.carservice.model.Order;
+import com.example.carservice.model.Owner;
 import com.example.carservice.model.ServiceModel;
 import com.example.carservice.repository.OrderRepository;
+import com.example.carservice.service.MasterService;
 import com.example.carservice.service.OrderService;
+import com.example.carservice.service.OwnerService;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderServiceImpl implements OrderService {
     private static final double GOODS_DISCOUNT_PERCENT = 0.01;
     private static final double SERVICE_DISCOUNT_PERCENT = 0.02;
-    private static final Long DIAGNOSTIC_ID = 1L;
     private final OrderRepository orderRepository;
+    private final OwnerService ownerService;
+    private final MasterService masterService;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository,
+                            OwnerService ownerService,
+                            MasterService masterService) {
         this.orderRepository = orderRepository;
+        this.ownerService = ownerService;
+        this.masterService = masterService;
+    }
+
+    @Override
+    public List<Order> getAll() {
+        return orderRepository.findAll();
+    }
+
+    @Override
+    public Order get(Long id) {
+        return orderRepository.getReferenceById(id);
     }
 
     @Override
     public Order add(Order order) {
         order.setOrderTime(LocalDateTime.now());
-        return orderRepository.save(order);
+        orderRepository.save(order);
+        Owner owner = order.getCar().getOwner();
+        owner.getOrders().add(order);
+        ownerService.update(owner);
+        return order;
     }
 
     @Override
@@ -35,6 +59,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order update(Order order) {
+        Order oldOrder = get(order.getId());
+        order.setOrderTime(oldOrder.getOrderTime());
+        order.setServices(oldOrder.getServices());
+        order.setPrice(oldOrder.getPrice());
+        order.setCompletionTime(oldOrder.getCompletionTime());
         return orderRepository.save(order);
     }
 
@@ -44,9 +73,16 @@ public class OrderServiceImpl implements OrderService {
         if (status == Order.OrderStatus.COMPLETED_SUCCESSFULLY
                 || status == Order.OrderStatus.COMPLETED_UNSUCCESSFULLY) {
             order.setCompletionTime(LocalDateTime.now());
+            List<Master> masters = order.getServices()
+                    .stream()
+                    .map(ServiceModel::getMaster)
+                    .distinct()
+                    .peek(master -> master.getCompletedOrders().add(order))
+                    .toList();
+            masterService.update(masters);
         }
         order.setStatus(status);
-        return update(order);
+        return orderRepository.save(order);
     }
 
     @Override
@@ -55,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal price = calculateGoodsPriceAfterDiscount(order)
                 .add(calculateServicesPriceAfterDiscount(order));
         order.setPrice(price);
-        update(order);
+        orderRepository.save(order);
         return price;
     }
 
@@ -72,19 +108,14 @@ public class OrderServiceImpl implements OrderService {
     private BigDecimal calculateServicesPriceAfterDiscount(Order order) {
         int ownerOrderSize = order.getCar().getOwner().getOrders().size();
         double discount = ownerOrderSize * SERVICE_DISCOUNT_PERCENT;
-        if (order.getServices().stream().anyMatch(s -> s.getId().equals(DIAGNOSTIC_ID))) {
-            if (order.getServices().size() > 1) {
-                return order.getServices()
-                        .stream()
-                        .filter(s -> !s.getId().equals(DIAGNOSTIC_ID))
-                        .map(ServiceModel::getPrice)
-                        .reduce(BigDecimal.ZERO, BigDecimal::add)
-                        .multiply(new BigDecimal(1.0 - discount));
-            } else {
-                return order.getServices().get(0).getPrice()
-                        .multiply(new BigDecimal(1.0 - discount));
-            }
-        }
-        return new BigDecimal(0);
+        boolean allServicesAreDiagnostic = order.getServices()
+                .stream()
+                .allMatch(ServiceModel::getDiagnostic);
+        return order.getServices()
+                .stream()
+                .filter(service -> allServicesAreDiagnostic ^ !service.getDiagnostic())
+                .map(ServiceModel::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .multiply(new BigDecimal(1.0 - discount));
     }
 }

@@ -1,0 +1,37 @@
+.menu {
+  margin: 20vh auto;
+  width: min-content;
+}
+
+.menu p {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #4A8888;
+  margin: 4px 0;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: xx-large;
+}
+
+.menu li a {
+  display: block;
+  margin: 4px 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  color: #6F6F6F;
+}
+
+.menu li a:hover {
+  text-decoration: underline;
+}

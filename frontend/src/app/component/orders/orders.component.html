@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class="navigation-block">
+    <app-head-navigation [titleText]="'Orders'" [toCreatingMode]="toCreatingMode"></app-head-navigation>
+  </div>
+  <div class="model-list-block scrollbar">
+    <ul class="model-list">
+      <li class="list-header">
+        <div class="col-1 header">Id</div>
+        <div class="col-2 header">Description</div>
+        <div class="col-3 header">Status</div>
+        <div class="col-4 header">Order time</div>
+      </li>
+      <li *ngFor="let order of orders" class="list-item" (click)="selectOrder(order.id)"
+      [ngStyle]="{'border-color': order.id == selectedOrderId ? '#999' : 'transparent'}">
+        <div class="col-1">{{order.id}}</div>
+        <div class="col-2">{{order.description}}</div>
+        <div class="col-3">{{(statusValues[statusKeys.indexOf(order.status)])}}</div>
+        <div class="col-4">{{order.orderTime | date:'shortDate'}}</div>
+      </li>
+    </ul>
+  </div>
+  <div class="model-detail-block scrollbar">
+    <span *ngIf="!selectedOrderId && !creatingNewOrder" class="model-detail-message">You have not selected any order</span>
+    <app-order-detail *ngIf="selectedOrderId" [orderId]="selectedOrderId"></app-order-detail>
+    <app-new-order *ngIf="creatingNewOrder"></app-new-order>
+  </div>
+</div>
