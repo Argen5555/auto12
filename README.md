@@ -58,7 +58,7 @@ The frontend part also has a global error interceptor that opens a standard brow
 1. Clone the project from GitHub
 2. Open terminal in the project folder and run `mvn clean package -DskipTests` (you must also have Maven installed)
 3. When the project was built successfully, run the following command: `docker-compose up`
-4. After a successful start, the program can be tested using the link `http://localhost:6868/swagger-ui.html`
+4. After a successful start, the program can be tested using the link `http://localhost:6868/api/swagger-ui.html`
 
 ### Run Frontend
 5. Install npm by the [link](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
