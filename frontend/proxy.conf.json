@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "http://localhost:6868",
+    "target": "https://back-production-c43b.up.railway.app/",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
